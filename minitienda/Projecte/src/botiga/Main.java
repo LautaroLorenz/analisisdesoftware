@@ -762,7 +762,7 @@ public class Main extends javax.swing.JFrame
             }
         });
 
-        jLabel5.setText("€");
+        jLabel5.setText("$");
 
         javax.swing.GroupLayout jpnUserLayout = new javax.swing.GroupLayout(jpnUser);
         jpnUser.setLayout(jpnUserLayout);
@@ -1119,10 +1119,10 @@ public class Main extends javax.swing.JFrame
        String producto = jtnombre.getText();
        String precio =jtprecio.getText();
        String descripcion= jtdescripcion.getText();
-       int price = 0;
+       double price = 0;
        if(!precio.isEmpty())
        {
-            price = Utils.leerEntero(precio);
+            price = Utils.leerDouble(precio);
        }
 
        // bloque de validaciones

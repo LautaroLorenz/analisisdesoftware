@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Productos implements Serializable {
  private String Nombre = "";
    private String Descripcion = "";
-    private int Precio= 0;
+    private double Precio= 0;
 
     public Productos()
     {
@@ -23,7 +23,7 @@ public class Productos implements Serializable {
     }
 
 
-  public Productos(String nombre,String descripcion,int precio)
+  public Productos(String nombre,String descripcion,double precio)
     {
         this.Nombre = nombre;
         this.Descripcion = descripcion;
@@ -48,7 +48,7 @@ public class Productos implements Serializable {
         return this.Nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return this.Precio;
     }
 

@@ -183,7 +183,7 @@ public class Utils
     }
    
     
-    public static Productos[] insertarProductos(Productos[] array,String nombre,String descripcion,int precio)
+    public static Productos[] insertarProductos(Productos[] array,String nombre,String descripcion,double precio)
     {
         Productos prod = new Productos(nombre,descripcion,precio);
         int cont = 0;
@@ -199,6 +199,17 @@ public class Utils
         try
         {
             return (int)Integer.valueOf(admin).intValue();
+        }
+        catch (Exception e)
+        {
+            return -1;
+        }
+    }
+    
+    public static double leerDouble(String admin) {
+        try
+        {
+            return (double)Double.valueOf(admin).doubleValue();
         }
         catch (Exception e)
         {
