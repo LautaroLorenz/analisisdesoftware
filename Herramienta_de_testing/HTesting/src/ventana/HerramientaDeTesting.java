@@ -11,8 +11,12 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 
 import Funcion.Funcion;
 
@@ -25,8 +29,18 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
+import javax.swing.JScrollPane;
 
 public class HerramientaDeTesting extends JFrame {
+	
+	/*
+	 * PARECE QUE EL TIENE PROBLEMAS CON CODIGOS DE 100 LINEAS, VALIDAR PORQ
+	 * esto pasa en la funcion
+	 * private void jbnAceptarActionPerformed(java...)
+	 * private void mostrarUsuario
+	 * 
+	 * estos metodos son de la clase main
+	 */
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -39,7 +53,15 @@ public class HerramientaDeTesting extends JFrame {
 	private final Action action = new SwingAction();;
 	String ruta;
 	private List codigo = new List();
+	ArrayList<int[]> matriz= new ArrayList<int[]>();
+	
+	
 	String lim = "hola";
+	
+	Color colorfondodefault;
+    Highlighter hilit;
+    Highlighter.HighlightPainter painter;
+    JTextArea textArea = new JTextArea();
 	
 	/**
 	 * Launch the application.
@@ -82,42 +104,57 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(lblNewLabel);
 		listMetodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//codigo.add(listMetodos.getSelectedIndex());
-				codigo.removeAll();
+				String linea = "";
+				String subLinea="";
+				int indeX = 0;
+				int indeY = 0;
+
+				textArea.removeAll();
+				matriz.clear();
+				
 				
 				for(int i = 0; i< funciones.get(listMetodos.getSelectedIndex()).getCodigo().size();i++){
-					String linea = funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
-					
-					if(linea.contains("if") || linea.contains("while") || linea.contains("for")){
-						linea = linea.toUpperCase();
-						
+					indeX = linea.length();
+					indeY = indeX+funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i).length();
+					subLinea = funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
+					linea = linea+"\n"+funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
+
+					if(subLinea.contains("if(") || linea.contains("while(") || linea.contains("for(")){
+						int a[] = {indeX,indeY};
+						matriz.add(a);				
 						
 					}
-				
-					codigo.add(linea);
+					 
 					
 				}
+				textArea.setText(linea);
+				textArea.setHighlighter(hilit);
+				for(int i = 0; i<matriz.size();i++){
+					 try {
+							hilit.addHighlight(matriz.get(i)[0], matriz.get(i)[1], painter);
+							
+						} catch (BadLocationException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				}
+				
+				indeX= indeY = 0;
+											
 				
 			}
+
+
 		});
 		
-		listMetodos.setBounds(10, 142, 409, 188);
+		listMetodos.setBounds(20, 142, 399, 188);
 		contentPane.add(listMetodos);
 		
-		
-		
-		codigo.setBounds(10, 374, 546, 271);
-		contentPane.add(codigo);
-		
-		
-		//codigo.add(listMetodos.getSelectedIndex()+"");
-		/*
-		for(int i = 0; i< funciones.get(listMetodos.getSelectedIndex()).getCodigo().size();i++){
-			codigo.add(funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i));
-		}
-		*/
-		
-		
+		hilit = new DefaultHighlighter();
+        painter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+        
+       
+	
 		
 		JLabel lblNewLabel_1 = new JLabel("Analisis del metodo");
 		lblNewLabel_1.setBounds(731, 112, 163, 14);
@@ -194,8 +231,35 @@ public class HerramientaDeTesting extends JFrame {
 				calcularValoresAnalisis();
 			}
 		});
-		btnNewButton_1.setBounds(697, 456, 138, 77);
+		btnNewButton_1.setBounds(697, 374, 138, 77);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Limpiar resultados");
+		btnNewButton_2.setAction(action);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				limpiarRegistro();
+			}
+
+			private void limpiarRegistro() {
+				
+				textField_1.setText("");
+				textField_2.setText("");
+				textField_3.setText("");
+				textField_4.setText("");
+			}
+		});
+		btnNewButton_2.setBounds(697, 508, 138, 77);
+		btnNewButton_2.setText("Limpio resultados");
+		contentPane.add(btnNewButton_2);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 381, 536, 239);
+		contentPane.add(scrollPane);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
 
 	}
 	private class SwingAction extends AbstractAction {
@@ -211,6 +275,8 @@ public class HerramientaDeTesting extends JFrame {
 	 */
 	private void elegirArchivo() throws FileNotFoundException {
 		Scanner entrada = null;
+		listMetodos.removeAll();
+		textArea.setText("");
 
 		JFileChooser selectorArchivos = new JFileChooser();
 	

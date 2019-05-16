@@ -68,6 +68,7 @@ public class Funcion {
 				fun.codigo.add(linea);
 				fun.namefuncion = linea;
 				fun.namefuncion=fun.namefuncion.replace("{", "");
+				fun.namefuncion=fun.namefuncion.trim();
 				cargandoFuncion = true;
 				fun.numLiniaIni = CANTLINEAARCHIVO;
 				if(linea.contains("{")){
