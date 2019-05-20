@@ -69,6 +69,8 @@ public class HerramientaDeTesting extends JFrame {
     Highlighter hilit;
     Highlighter.HighlightPainter painter;
     JTextArea textArea = new JTextArea();
+    private JTextField textField_5;
+    private JTextField textField_6;
 	
 	/**
 	 * Launch the application.
@@ -169,19 +171,19 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Lineas de codigo");
-		lblNewLabel_2.setBounds(568, 151, 100, 14);
+		lblNewLabel_2.setBounds(605, 151, 100, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Lineas comentadas");
-		lblNewLabel_3.setBounds(549, 206, 119, 14);
+		lblNewLabel_3.setBounds(594, 206, 119, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Porcentaje de codigo comentado");
-		lblNewLabel_4.setBounds(477, 258, 191, 14);
+		lblNewLabel_4.setBounds(533, 258, 191, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Complejidad ciclomatica");
-		lblNewLabel_5.setBounds(518, 319, 150, 14);
+		lblNewLabel_5.setBounds(574, 319, 150, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		textField_1 = new JTextField();
@@ -240,7 +242,7 @@ public class HerramientaDeTesting extends JFrame {
 				calcularValoresAnalisis();
 			}
 		});
-		btnNewButton_1.setBounds(697, 374, 138, 77);
+		btnNewButton_1.setBounds(707, 489, 138, 77);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Limpiar resultados");
@@ -253,7 +255,7 @@ public class HerramientaDeTesting extends JFrame {
 
 			
 		});
-		btnNewButton_2.setBounds(697, 508, 138, 77);
+		btnNewButton_2.setBounds(707, 577, 138, 77);
 		btnNewButton_2.setText("Limpio resultados");
 		contentPane.add(btnNewButton_2);
 		
@@ -263,6 +265,24 @@ public class HerramientaDeTesting extends JFrame {
 		
 		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(749, 384, 86, 20);
+		contentPane.add(textField_5);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(749, 443, 86, 20);
+		contentPane.add(textField_6);
+		
+		JLabel lblFanIn = new JLabel("Fan in");
+		lblFanIn.setBounds(637, 387, 48, 14);
+		contentPane.add(lblFanIn);
+		
+		JLabel lblFanOut = new JLabel("Fan out");
+		lblFanOut.setBounds(637, 446, 48, 14);
+		contentPane.add(lblFanOut);
 
 	}
 	private class SwingAction extends AbstractAction {
