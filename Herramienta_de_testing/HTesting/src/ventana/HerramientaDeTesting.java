@@ -349,6 +349,8 @@ public class HerramientaDeTesting extends JFrame {
 		textField_2.setText("");
 		textField_3.setText("");
 		textField_4.setText("");
+		textField_5.setText("");
+		textField_6.setText("");
 		resultados=false;
 	}
 	
@@ -390,6 +392,8 @@ public class HerramientaDeTesting extends JFrame {
 			textField_2.setText(funciones.get(index).getCantlineaComentario()+"");
 			textField_3.setText(porcentajeCodigoComentado+"");
 			textField_4.setText(funciones.get(index).getComplejidadCiclomatica()+"");
+			textField_5.setText("0");
+			textField_6.setText("0");
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
 			resultados = false;
