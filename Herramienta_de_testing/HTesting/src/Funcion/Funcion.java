@@ -1,6 +1,7 @@
 package Funcion;
 
 
+import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -162,12 +163,12 @@ public class Funcion {
 			return this.codigo;
 		 }
 
-		public int getFanIn() {
-			
+		public int getFanIn(List listMetodos) {
+
 			return 0;
 		}
 
-		public int getFanOut() {
+		public int getFanOut(List listMetodos) {
 			
 			return 0;
 		}

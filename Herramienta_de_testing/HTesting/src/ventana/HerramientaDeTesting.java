@@ -67,7 +67,7 @@ public class HerramientaDeTesting extends JFrame {
 	
 	Color colorfondodefault;
     Highlighter hilit;
-    Highlighter.HighlightPainter painter;
+    Highlighter.HighlightPainter painter, painterFor, painterWhile;
     JTextArea textArea = new JTextArea();
     private JTextField textField_5;
     private JTextField textField_6;
@@ -162,6 +162,9 @@ public class HerramientaDeTesting extends JFrame {
 		
 		hilit = new DefaultHighlighter();
         painter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+        painterFor = new DefaultHighlighter.DefaultHighlightPainter(Color.CYAN);
+        painterWhile = new DefaultHighlighter.DefaultHighlightPainter(Color.PINK);
+        
         
        
 	
@@ -313,9 +316,19 @@ public class HerramientaDeTesting extends JFrame {
 			subLinea = funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
 			linea = linea+"\n"+funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
 
-			if(subLinea.contains("if(") || linea.contains("while(") || linea.contains("for(")){
+			if(subLinea.contains("for(")){
 				int a[] = {indeX,indeY};
 				matriz.add(a);					
+			}
+			
+			if(subLinea.contains("if(")) {
+				int a[] = {indeX, indeY};
+				matriz.add(a);
+			}
+			
+			if(subLinea.contains("while(")) {
+				int a[] = {indeX, indeY};
+				matriz.add(a);
 			}
 		}
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -329,7 +342,7 @@ public class HerramientaDeTesting extends JFrame {
 		textArea.setHighlighter(hilit);
 		for(int i = 0; i<matriz.size();i++){
 			 try {
-					hilit.addHighlight(matriz.get(i)[0], matriz.get(i)[1], painter);
+					hilit.addHighlight(matriz.get(i)[0], matriz.get(i)[1], painterFor);
 					
 				} catch (BadLocationException e1) {
 					// TODO Auto-generated catch block
@@ -392,8 +405,8 @@ public class HerramientaDeTesting extends JFrame {
 			textField_2.setText(funciones.get(index).getCantlineaComentario()+"");
 			textField_3.setText(porcentajeCodigoComentado+"");
 			textField_4.setText(funciones.get(index).getComplejidadCiclomatica()+"");
-			textField_5.setText(funciones.get(index).getFanIn()+"");
-			textField_6.setText(funciones.get(index).getFanOut()+"");
+			textField_5.setText(funciones.get(index).getFanIn(listMetodos)+"");
+			textField_6.setText(funciones.get(index).getFanOut(listMetodos)+"");
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
 			resultados = false;
