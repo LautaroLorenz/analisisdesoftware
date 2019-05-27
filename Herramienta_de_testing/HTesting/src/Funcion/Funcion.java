@@ -161,4 +161,14 @@ public class Funcion {
 		public ArrayList<String> getCodigo(){
 			return this.codigo;
 		 }
+
+		public int getFanIn() {
+			
+			return 0;
+		}
+
+		public int getFanOut() {
+			
+			return 0;
+		}
 }
