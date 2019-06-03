@@ -54,6 +54,8 @@ public class Funcion {
 	private int N2;
 	private int n1;
 	private int n2;
+	ArrayList<String> listaDeOperadores = new ArrayList<String>();
+	ArrayList<String> listaDeOperandos = new ArrayList<String>();
 	
 	public Funcion(){
 		this.namefuncion = "";
@@ -300,15 +302,21 @@ public class Funcion {
 			
 			for(int i = 0; i <operadores.length; i++) {
 				if(string.contains(operadores[i])) {
+					if(!(listaDeOperadores.contains(operadores[i])))
+					listaDeOperadores.add(operadores[i]);
+					
 					return true;
 				}
 			}
+			if(!(listaDeOperandos.contains(string)))
+				listaDeOperandos.add(string);
+			
 			return false;
 		}
 
 		public double getVolumen() {
 			
-		//	calcularn1yn2();
+			calcularn1yn2();
 			int n = this.n1 + this.n2,
 				nGr = this.getLongitud();
 			return nGr * (Math.log10(n)/Math.log10(2));
@@ -316,8 +324,6 @@ public class Funcion {
 
 		private void calcularn1yn2() {
 			
-			ArrayList<String> listaDeOperadores = new ArrayList<String>();
-			ArrayList<String> listaDeOperandos = new ArrayList<String>();
 			this.n1 = listaDeOperadores.size();
 			this.n2 = listaDeOperandos.size();
 		}
