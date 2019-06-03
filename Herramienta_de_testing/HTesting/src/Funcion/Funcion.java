@@ -1,24 +1,38 @@
 package Funcion;
 
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 
+
+
 public class Funcion {
 	
 	public static  int CANTLINEAARCHIVO = 0;
 	public String namefuncion;
+	public String shortName;
 	public int getCantlineaComentario() {
 		return cantlineaComentario;
 	}
+	
+
 
 	private int numLiniaIni;
 	//private int numLineaFin;
 	//private int cantParam;
+	
+	
+	
+	
 	private int cantIf;
+	
+	
+
+	
 	public int getNumLiniaIni() {
 		return numLiniaIni;
 	}
@@ -34,6 +48,8 @@ public class Funcion {
 	private int llaveCierreFun;
 	private int contadorLlaves;
 	private ArrayList<String> codigo;
+	private int fanIn;
+	private int fanOut;
 	
 	public Funcion(){
 		this.namefuncion = "";
@@ -47,12 +63,48 @@ public class Funcion {
 		this.llaveCierreFun = 0;
 		this.contadorLlaves = 0;
 		this.codigo = new ArrayList<String>();
+		this.fanIn = 0;
+		this.fanOut = 0;
+	
+		
+		
 	}
 	
+	private static String  cargarShortNameFuncion(String nombre){
+		String[] aux =  null;
+		String aux2 = "";
+		String shortName1 = "";
+		//System.out.println(nombre);
+		aux = nombre.split(" ");
+		for(int i = 0; i< aux.length;i++){
+			if(aux[i].contains("("))
+				aux2 = aux[i];
+		}
+		
+		//System.out.println(aux2);
+		aux2= aux2.replace("(", " ");
+		aux = aux2.split(" ");
+		shortName1 = aux[0];
+		//System.out.println("productos(string".split("("));
+		//shortName1 = aux2.split("(");
+		//System.out.println(shortName1);
+		return shortName1;
+		
+	}
+	
+	public int getFanIn() {
+		return fanIn;
+	}
+
+	public int getFanOut() {
+		return fanOut;
+	}
+
 	public static ArrayList<Funcion> getFuncionesArchivo(String archivo) throws FileNotFoundException{
 		
 		ArrayList<Funcion> listaFun = new ArrayList<Funcion>();
 		Funcion fun = null;
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(new File(archivo));
 		String linea;
 		boolean cargandoFuncion = false;
@@ -69,6 +121,8 @@ public class Funcion {
 				fun.namefuncion = linea;
 				fun.namefuncion=fun.namefuncion.replace("{", "");
 				fun.namefuncion=fun.namefuncion.trim();
+				fun.shortName = cargarShortNameFuncion(fun.namefuncion);
+				//System.out.println(fun.namefuncion);
 				cargandoFuncion = true;
 				fun.numLiniaIni = CANTLINEAARCHIVO;
 				if(linea.contains("{")){
@@ -112,10 +166,59 @@ public class Funcion {
 			
 		}
 		
+		cargarFanInOut(listaFun);
 		return listaFun;
 		
 	}
+	/*
+	 * tengo que ver bien la logica, pero la idea es que agarro una funion y recorro todo el codigo, suamdno las
+	 * veces que aparecio esta.
+	 *
+	*/
 	
+	public static int contadorDeAparciciones(String lineaCodigo,String nombrefun){
+		int contador = 0;
+		while (lineaCodigo.indexOf(nombrefun) > -1) {
+			lineaCodigo = lineaCodigo.substring(lineaCodigo.indexOf(
+					nombrefun)+nombrefun.length(),lineaCodigo.length());
+		      contador++; 
+		}
+		return contador;
+	}
+	
+	private static String compactacionDeCodigo(ArrayList<String> codigo){
+		String lineaDeCodigo = "";
+		for(int i = 1; i < codigo.size();i++)
+			lineaDeCodigo = lineaDeCodigo + codigo.get(i);
+		return lineaDeCodigo;
+	}
+	public static void cargarFanInOut(ArrayList<Funcion> list){
+		
+		
+		String codigoDeFuncion = "";
+		int aux;;
+		
+		for(int i = 0; i< list.size(); i++){
+			codigoDeFuncion = compactacionDeCodigo(list.get(i).codigo);
+			
+			for(int j = 0; j<list.size(); j++){
+				
+				if(i!=j){
+					aux = contadorDeAparciciones(codigoDeFuncion,list.get(j).shortName+"(");
+					if(aux!=0){
+						//System.out.println("contador: "+ aux + " | funcion: "+ list.get(j).shortName+"(" + " | funcionNro: "+j);
+						list.get(i).fanOut = list.get(i).fanOut + aux;
+						list.get(j).fanIn = list.get(j).fanIn+ aux; 
+						aux = 0;
+					}
+					
+				}
+			}
+			//System.out.println("*********************************************");
+			
+			
+		}
+	}
 	
 	
 	public static boolean esFuncion(String linea){
@@ -150,6 +253,8 @@ public class Funcion {
 		System.out.println("llaveAperturaFun: "+fun.llaveAperturaFun);
 		System.out.println("llaveCierreFun: "+fun.llaveCierreFun);
 		System.out.println("contadorLlaves:"+fun.contadorLlaves);
+		System.out.println("FanIn:"+fun.fanIn);
+		System.out.println("FanOut:"+fun.fanOut);
 		System.out.println("===============codigo==================================");
 		for(int  i= 0; i < fun.codigo.size();i++)
 			System.out.println(fun.codigo.get(i));
