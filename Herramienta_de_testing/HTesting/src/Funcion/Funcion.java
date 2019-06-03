@@ -50,6 +50,10 @@ public class Funcion {
 	private ArrayList<String> codigo;
 	private int fanIn;
 	private int fanOut;
+	private int N1;
+	private int N2;
+	private int n1;
+	private int n2;
 	
 	public Funcion(){
 		this.namefuncion = "";
@@ -65,8 +69,10 @@ public class Funcion {
 		this.codigo = new ArrayList<String>();
 		this.fanIn = 0;
 		this.fanOut = 0;
-	
-		
+		this.N1 = 0;
+		this.N2 = 0;
+		this.n1 = 1;
+		this.n2 = 1;
 		
 	}
 	
@@ -198,7 +204,7 @@ public class Funcion {
 		String codigoDeFuncion = "";
 		int aux;;
 		
-		for(int i = 0; i< list.size(); i++){
+		for(int i = 0; i < list.size(); i++){
 			codigoDeFuncion = compactacionDeCodigo(list.get(i).codigo);
 			
 			for(int j = 0; j<list.size(); j++){
@@ -265,4 +271,64 @@ public class Funcion {
 		public ArrayList<String> getCodigo(){
 			return this.codigo;
 		 }
+
+		public int getLongitud() {
+			this.N1 = 0;
+			this.N2 = 0;
+			for (int i = 1; i < this.codigo.size(); i++) {
+				
+				String[] aux =  null;
+				String[] aux2 = null;
+				aux = this.codigo.get(i).trim().split(" ");
+				for(int j = 0; j < aux.length; j++) {
+						if(esOperador(aux[j]))
+						this.N1++;
+					else
+						this.N2++;
+				}
+			}
+			
+			return this.N1 + this.N2;
+		}
+
+		private boolean esOperador(String string) {
+			final String[] operadores = {"if(","for(","while(","break","then","=","*",
+										 "+","-","||","&&","/","{","}",">","<","<=",
+										 ">=","%", "do", "int", "double", "this", "String",
+										 "float", "System.out.println", "return", "false",
+										 "true", "null", "boolean", "final"};
+			
+			for(int i = 0; i <operadores.length; i++) {
+				if(string.contains(operadores[i])) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public double getVolumen() {
+			
+		//	calcularn1yn2();
+			int n = this.n1 + this.n2,
+				nGr = this.getLongitud();
+			return nGr * (Math.log10(n)/Math.log10(2));
+		}
+
+		private void calcularn1yn2() {
+			
+			ArrayList<String> listaDeOperadores = new ArrayList<String>();
+			ArrayList<String> listaDeOperandos = new ArrayList<String>();
+			this.n1 = listaDeOperadores.size();
+			this.n2 = listaDeOperandos.size();
+		}
+
+		public double getEsfuerzo() {
+			
+			final double constanteJava = 0.1;
+			double esfuerzo = this.getVolumen()/constanteJava;
+			
+			return esfuerzo;
+		}
+		
+		
 }

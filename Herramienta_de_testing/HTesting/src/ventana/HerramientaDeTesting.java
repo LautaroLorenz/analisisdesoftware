@@ -371,6 +371,9 @@ public class HerramientaDeTesting extends JFrame {
 		textField_4.setText("");
 		textField_5.setText("");
 		textField_6.setText("");
+		textField_7.setText("");
+		textField_8.setText("");
+		textField_9.setText("");
 		resultados=false;
 	}
 	
@@ -414,6 +417,9 @@ public class HerramientaDeTesting extends JFrame {
 			textField_4.setText(funciones.get(index).getComplejidadCiclomatica()+"");
 			textField_5.setText(funciones.get(index).getFanIn()+"");
 			textField_6.setText(funciones.get(index).getFanOut()+"");
+			textField_7.setText(funciones.get(index).getLongitud()+"");
+			textField_8.setText(funciones.get(index).getVolumen()+"");
+			textField_9.setText(funciones.get(index).getEsfuerzo()+"");
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
 			resultados = false;
