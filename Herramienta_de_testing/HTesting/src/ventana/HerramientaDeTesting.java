@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 
 import java.awt.event.ActionEvent;
@@ -28,14 +29,22 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Action;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JScrollPane;
 import java.awt.Font;
+import java.awt.Graphics;
+
+import javax.swing.JList;
+import javax.swing.JTextPane;
+import javax.swing.JProgressBar;
 
 @SuppressWarnings("serial")
 public class HerramientaDeTesting extends JFrame {
@@ -100,14 +109,14 @@ public class HerramientaDeTesting extends JFrame {
 
 		setTitle("EQUIPO 7*****Herramienta de Testing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 994, 704);
+		setBounds(0, 0, 1024, 725);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(122, 22, 846, 20);
+		textField.setBounds(122, 22, 616, 20);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
@@ -175,7 +184,7 @@ public class HerramientaDeTesting extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Analisis del Metodo");
 		lblNewLabel_1.setForeground(new Color(255, 0, 0));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel_1.setBounds(731, 112, 163, 14);
+		lblNewLabel_1.setBounds(729, 112, 163, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Lineas de codigo");
@@ -317,6 +326,11 @@ public class HerramientaDeTesting extends JFrame {
 		lblReporteDeAnalisis.setForeground(new Color(255, 0, 0));
 		lblReporteDeAnalisis.setBounds(574, 417, 261, 14);
 		contentPane.add(lblReporteDeAnalisis);
+		
+		JLabel lblPoweredByEquipo = new JLabel("Powered by Equipo 7 - Analisis de Software - 2019 ");
+		lblPoweredByEquipo.setForeground(new Color(128, 128, 128));
+		lblPoweredByEquipo.setBounds(20, 654, 305, 14);
+		contentPane.add(lblPoweredByEquipo);
 
 	}
 	private class SwingAction extends AbstractAction {
@@ -440,7 +454,14 @@ public class HerramientaDeTesting extends JFrame {
 			return;
 		}
 		
-		
-
-	}
+		}
+	
+	public void paint(Graphics gra) {
+		super.paint(gra);
+		try {
+			BufferedImage fondo = ImageIO.read(new File("logo_unlam.png"));
+			gra.drawImage(fondo, 870, 40, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}}
 }
