@@ -284,7 +284,7 @@ public class Funcion {
 				aux = this.codigo.get(i).trim().split(" ");
 				for(int j = 0; j < aux.length; j++) {
 						String[] aux2 = null;
-					    aux[j].replace("(", " ");
+					    aux[j] = aux[j].replace("(", " ");
 					    aux2 = aux[j].split(" ");
 					for(int k = 0; k < aux2.length; k++) {
 						if(esOperador(aux[j]))
@@ -295,7 +295,7 @@ public class Funcion {
 				}
 			}
 			
-			return this.N1 + this.N2;
+			return this.N1 + this.N2 - 1;
 		}
 
 		private boolean esOperador(String string) {
