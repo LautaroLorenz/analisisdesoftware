@@ -45,6 +45,7 @@ import java.awt.Graphics;
 import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class HerramientaDeTesting extends JFrame {
@@ -66,6 +67,7 @@ public class HerramientaDeTesting extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JLabel lblComentarCodigo = new JLabel();
 	private final Action action = new SwingAction();;
 	String ruta;
 	private List codigo = new List();
@@ -114,6 +116,7 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		textField = new JTextField();
 		textField.setBounds(122, 22, 616, 20);
@@ -324,13 +327,16 @@ public class HerramientaDeTesting extends JFrame {
 		JLabel lblReporteDeAnalisis = new JLabel("Reporte de Analisis");
 		lblReporteDeAnalisis.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblReporteDeAnalisis.setForeground(new Color(255, 0, 0));
-		lblReporteDeAnalisis.setBounds(574, 417, 261, 14);
+		lblReporteDeAnalisis.setBounds(689, 417, 261, 14);
 		contentPane.add(lblReporteDeAnalisis);
-		
+		contentPane.add(lblComentarCodigo);
+		lblComentarCodigo.setVisible(false);
 		JLabel lblPoweredByEquipo = new JLabel("Powered by Equipo 7 - Analisis de Software - 2019 ");
 		lblPoweredByEquipo.setForeground(new Color(128, 128, 128));
 		lblPoweredByEquipo.setBounds(20, 654, 305, 14);
 		contentPane.add(lblPoweredByEquipo);
+		
+		
 
 	}
 	private class SwingAction extends AbstractAction {
@@ -437,17 +443,29 @@ public class HerramientaDeTesting extends JFrame {
 		try{
 			int index = listMetodos.getSelectedIndex();
 			int lineasCodigo = funciones.get(index).getLlaveCierreFun()-funciones.get(index).getNumLiniaIni()+1;
-			double porcentajeCodigoComentado = (funciones.get(index).getCantlineaComentario()* 100)/lineasCodigo;
+			int porcentajeCodigoComentado = (funciones.get(index).getCantlineaComentario()* 100)/lineasCodigo;
 			resultados = true;
 			textField_1.setText(lineasCodigo+"");
 			textField_2.setText(funciones.get(index).getCantlineaComentario()+"");
-			textField_3.setText(porcentajeCodigoComentado+"");
+			textField_3.setText(porcentajeCodigoComentado+" %");
 			textField_4.setText(funciones.get(index).getComplejidadCiclomatica()+"");
 			textField_5.setText(funciones.get(index).getFanIn()+"");
 			textField_6.setText(funciones.get(index).getFanOut()+"");
 			textField_7.setText(funciones.get(index).getLongitud()+"");
 			textField_8.setText(String.format("%.2f", funciones.get(index).getVolumen()));
 			textField_9.setText(String.format("%.2f" , funciones.get(index).getEsfuerzo()));
+			
+			if(porcentajeCodigoComentado < 50) {
+				lblComentarCodigo.setText("Se recomienda comentar m\u00E1s el c\u00F3digo");
+				lblComentarCodigo.setBackground(new Color(128, 128, 128));
+				lblComentarCodigo.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblComentarCodigo.setBounds(638, 468, 254, 14);
+				lblComentarCodigo.setVisible(true);
+				
+			}
+			else
+				lblComentarCodigo.setVisible(false);
+			
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
 			resultados = false;
