@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class HerramientaDeTesting extends JFrame {
@@ -174,19 +175,19 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Lineas de codigo");
-		lblNewLabel_2.setBounds(605, 151, 100, 14);
+		lblNewLabel_2.setBounds(638, 151, 100, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Lineas comentadas");
-		lblNewLabel_3.setBounds(593, 176, 119, 14);
+		lblNewLabel_3.setBounds(624, 176, 119, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Porcentaje de codigo comentado");
-		lblNewLabel_4.setBounds(533, 201, 191, 14);
+		lblNewLabel_4.setBounds(559, 201, 191, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Complejidad ciclomatica");
-		lblNewLabel_5.setBounds(574, 226, 150, 14);
+		lblNewLabel_5.setBounds(600, 226, 150, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		textField_1 = new JTextField();
@@ -213,6 +214,7 @@ public class HerramientaDeTesting extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Archivo");
+		btnNewButton.setBackground(Color.CYAN);
 		btnNewButton.setBounds(10, 21, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -236,7 +238,9 @@ public class HerramientaDeTesting extends JFrame {
 		lblCodigoFuente.setBounds(76, 336, 129, 34);
 		contentPane.add(lblCodigoFuente);
 		
-		JButton btnNewButton_1 = new JButton("Correr Analisis");
+		JButton btnNewButton_1 = new JButton("Correr An\u00E1lisis");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnNewButton_1.setBackground(Color.ORANGE);
 		//SABRI: ACA VALIDAR SI NO HAY NADA SELECCIONADO
 		
 		btnNewButton_1.setAction(action);
@@ -253,6 +257,8 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
+		textArea.setForeground(Color.BLACK);
+		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 		
 		textField_5 = new JTextField();
@@ -266,23 +272,23 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(textField_6);
 		
 		JLabel lblFanIn = new JLabel("Fan in");
-		lblFanIn.setBounds(657, 257, 48, 14);
+		lblFanIn.setBounds(679, 260, 48, 14);
 		contentPane.add(lblFanIn);
 		
 		JLabel lblFanOut = new JLabel("Fan out");
-		lblFanOut.setBounds(657, 288, 48, 14);
+		lblFanOut.setBounds(679, 285, 48, 14);
 		contentPane.add(lblFanOut);
 		
 		JLabel lblLongitud = new JLabel("Longitud");
-		lblLongitud.setBounds(638, 321, 67, 14);
+		lblLongitud.setBounds(676, 316, 67, 14);
 		contentPane.add(lblLongitud);
 		
 		JLabel lblVolumen = new JLabel("Volumen");
-		lblVolumen.setBounds(638, 346, 67, 14);
+		lblVolumen.setBounds(676, 346, 67, 14);
 		contentPane.add(lblVolumen);
 		
 		JLabel lblEzfuerzo = new JLabel("Ezfuerzo");
-		lblEzfuerzo.setBounds(638, 375, 67, 14);
+		lblEzfuerzo.setBounds(676, 375, 67, 14);
 		contentPane.add(lblEzfuerzo);
 		
 		textField_7 = new JTextField();
