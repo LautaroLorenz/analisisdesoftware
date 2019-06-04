@@ -280,13 +280,18 @@ public class Funcion {
 			for (int i = 1; i < this.codigo.size(); i++) {
 				
 				String[] aux =  null;
-				String[] aux2 = null;
+				
 				aux = this.codigo.get(i).trim().split(" ");
 				for(int j = 0; j < aux.length; j++) {
+						String[] aux2 = null;
+					    aux[j].replace("(", " ");
+					    aux2 = aux[j].split(" ");
+					for(int k = 0; k < aux2.length; k++) {
 						if(esOperador(aux[j]))
 						this.N1++;
 					else
 						this.N2++;
+					}				
 				}
 			}
 			
@@ -298,7 +303,7 @@ public class Funcion {
 										 "+","-","||","&&","/","{","}",">","<","<=",
 										 ">=","%", "do", "int", "double", "this", "String",
 										 "float", "System.out.println", "return", "false",
-										 "true", "null", "boolean", "final"};
+										 "true", "null", "boolean", "final", "else"};
 			
 			for(int i = 0; i <operadores.length; i++) {
 				if(string.contains(operadores[i])) {
