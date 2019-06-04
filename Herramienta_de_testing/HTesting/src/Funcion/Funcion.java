@@ -2,12 +2,14 @@ package Funcion;
 
 
 
+
+
+import java.awt.List;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-
 
 
 public class Funcion {
@@ -20,19 +22,12 @@ public class Funcion {
 	}
 	
 
-
 	private int numLiniaIni;
 	//private int numLineaFin;
 	//private int cantParam;
 	
-	
-	
-	
 	private int cantIf;
-	
-	
 
-	
 	public int getNumLiniaIni() {
 		return numLiniaIni;
 	}
@@ -56,6 +51,7 @@ public class Funcion {
 	private int n2;
 	ArrayList<String> listaDeOperadores = new ArrayList<String>();
 	ArrayList<String> listaDeOperandos = new ArrayList<String>();
+
 	
 	public Funcion(){
 		this.namefuncion = "";
@@ -131,6 +127,7 @@ public class Funcion {
 				fun.namefuncion=fun.namefuncion.trim();
 				fun.shortName = cargarShortNameFuncion(fun.namefuncion);
 				//System.out.println(fun.namefuncion);
+
 				cargandoFuncion = true;
 				fun.numLiniaIni = CANTLINEAARCHIVO;
 				if(linea.contains("{")){
@@ -174,6 +171,7 @@ public class Funcion {
 			
 		}
 		
+
 		cargarFanInOut(listaFun);
 		return listaFun;
 		
@@ -263,6 +261,7 @@ public class Funcion {
 		System.out.println("contadorLlaves:"+fun.contadorLlaves);
 		System.out.println("FanIn:"+fun.fanIn);
 		System.out.println("FanOut:"+fun.fanOut);
+
 		System.out.println("===============codigo==================================");
 		for(int  i= 0; i < fun.codigo.size();i++)
 			System.out.println(fun.codigo.get(i));
@@ -341,4 +340,14 @@ public class Funcion {
 		}
 		
 		
+
+		public int getFanIn(List listMetodos) {
+
+			return 0;
+		}
+
+		public int getFanOut(List listMetodos) {
+			
+			return 0;
+		}
 }

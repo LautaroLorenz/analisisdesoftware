@@ -21,7 +21,10 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+
 import javax.imageio.ImageIO;
+
+
 import javax.swing.AbstractAction;
 
 import java.awt.event.ActionEvent;
@@ -29,11 +32,15 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import java.awt.image.BufferedImage;
+
+
 
 import javax.swing.Action;
 
 import java.awt.event.ActionListener;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -46,6 +53,11 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
+
+import java.io.FileNotFoundException;
+
+import javax.swing.JScrollPane;
+
 
 @SuppressWarnings("serial")
 public class HerramientaDeTesting extends JFrame {
@@ -67,7 +79,9 @@ public class HerramientaDeTesting extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+
 	private JLabel lblComentarCodigo = new JLabel();
+
 	private final Action action = new SwingAction();;
 	String ruta;
 	private List codigo = new List();
@@ -79,13 +93,17 @@ public class HerramientaDeTesting extends JFrame {
 	
 	Color colorfondodefault;
     Highlighter hilit;
-    Highlighter.HighlightPainter painter;
+
     JTextArea textArea = new JTextArea();
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
     private JTextField textField_8;
     private JTextField textField_9;
+
+    Highlighter.HighlightPainter painter, painterFor, painterWhile;
+
+
 	
 	/**
 	 * Launch the application.
@@ -111,6 +129,7 @@ public class HerramientaDeTesting extends JFrame {
 
 		setTitle("EQUIPO 7*****Herramienta de Testing");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setBounds(0, 0, 1024, 725);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -120,12 +139,18 @@ public class HerramientaDeTesting extends JFrame {
 		
 		textField = new JTextField();
 		textField.setBounds(122, 22, 616, 20);
+
+		textField = new JTextField();
+		textField.setBounds(122, 22, 623, 20);
+
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Metodos encontrados");
+
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+
 		lblNewLabel.setBounds(76, 102, 129, 34);
 		
 		contentPane.add(lblNewLabel);
@@ -180,10 +205,13 @@ public class HerramientaDeTesting extends JFrame {
 		
 		hilit = new DefaultHighlighter();
         painter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
-        
+
+        painterFor = new DefaultHighlighter.DefaultHighlightPainter(Color.CYAN);
+        painterWhile = new DefaultHighlighter.DefaultHighlightPainter(Color.PINK);
        
 	
 		
+
 		JLabel lblNewLabel_1 = new JLabel("Analisis del Metodo");
 		lblNewLabel_1.setForeground(new Color(255, 0, 0));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -204,6 +232,7 @@ public class HerramientaDeTesting extends JFrame {
 		
 		JLabel lblNewLabel_5 = new JLabel("Complejidad ciclomatica");
 		lblNewLabel_5.setBounds(600, 226, 150, 14);
+
 		contentPane.add(lblNewLabel_5);
 		
 		textField_1 = new JTextField();
@@ -213,16 +242,19 @@ public class HerramientaDeTesting extends JFrame {
 		
 		textField_2 = new JTextField();
 		textField_2.setBounds(749, 173, 86, 20);
+
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(749, 198, 86, 20);
+
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
 		textField_4.setBounds(749, 223, 86, 20);
+
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -230,7 +262,10 @@ public class HerramientaDeTesting extends JFrame {
 		
 		
 		JButton btnNewButton = new JButton("Archivo");
+
 		btnNewButton.setBackground(Color.CYAN);
+
+
 		btnNewButton.setBounds(10, 21, 89, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -259,6 +294,7 @@ public class HerramientaDeTesting extends JFrame {
 		JButton btnNewButton_1 = new JButton("Correr An\u00E1lisis");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnNewButton_1.setBackground(Color.ORANGE);
+
 		//SABRI: ACA VALIDAR SI NO HAY NADA SELECCIONADO
 		
 		btnNewButton_1.setAction(action);
@@ -269,19 +305,23 @@ public class HerramientaDeTesting extends JFrame {
 		});
 		btnNewButton_1.setBounds(425, 253, 129, 76);
 		contentPane.add(btnNewButton_1);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 381, 536, 239);
 		contentPane.add(scrollPane);
 		
 		textArea = new JTextArea();
+
 		textArea.setForeground(Color.BLACK);
 		textArea.setEditable(false);
+
+
 		scrollPane.setViewportView(textArea);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(749, 254, 86, 20);
+
 		contentPane.add(textField_5);
 		
 		textField_6 = new JTextField();
@@ -367,9 +407,20 @@ public class HerramientaDeTesting extends JFrame {
 			subLinea = funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
 			linea = linea+"\n"+funciones.get(listMetodos.getSelectedIndex()).getCodigo().get(i);
 
-			if(subLinea.contains("if(") || linea.contains("while(") || linea.contains("for(")){
+
+			if(subLinea.contains("for(")){
 				int a[] = {indeX,indeY};
 				matriz.add(a);					
+			}
+			
+			if(subLinea.contains("if(")) {
+				int a[] = {indeX, indeY};
+				matriz.add(a);
+			}
+			
+			if(subLinea.contains("while(")) {
+				int a[] = {indeX, indeY};
+				matriz.add(a);
 			}
 		}
 		} catch (ArrayIndexOutOfBoundsException e) {
@@ -383,7 +434,8 @@ public class HerramientaDeTesting extends JFrame {
 		textArea.setHighlighter(hilit);
 		for(int i = 0; i<matriz.size();i++){
 			 try {
-					hilit.addHighlight(matriz.get(i)[0], matriz.get(i)[1], painter);
+
+					hilit.addHighlight(matriz.get(i)[0], matriz.get(i)[1], painterFor);
 					
 				} catch (BadLocationException e1) {
 					// TODO Auto-generated catch block
@@ -408,6 +460,7 @@ public class HerramientaDeTesting extends JFrame {
 		textField_7.setText("");
 		textField_8.setText("");
 		textField_9.setText("");
+		lblComentarCodigo.setVisible(false);
 		resultados=false;
 	}
 	
@@ -443,6 +496,7 @@ public class HerramientaDeTesting extends JFrame {
 		try{
 			int index = listMetodos.getSelectedIndex();
 			int lineasCodigo = funciones.get(index).getLlaveCierreFun()-funciones.get(index).getNumLiniaIni()+1;
+
 			int porcentajeCodigoComentado = (funciones.get(index).getCantlineaComentario()* 100)/lineasCodigo;
 			resultados = true;
 			textField_1.setText(lineasCodigo+"");
@@ -472,6 +526,7 @@ public class HerramientaDeTesting extends JFrame {
 			return;
 		}
 		
+
 		}
 	
 	public void paint(Graphics gra) {
@@ -482,4 +537,5 @@ public class HerramientaDeTesting extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}}
+
 }
