@@ -337,7 +337,6 @@ public class Funcion {
 			
 			final double constanteJava = 0.1;
 			double esfuerzo = this.getVolumen()/constanteJava;
-			
 			return esfuerzo;
 		}
 		

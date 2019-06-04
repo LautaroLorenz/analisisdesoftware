@@ -112,6 +112,8 @@ public class HerramientaDeTesting extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Metodos encontrados");
+		lblNewLabel.setForeground(new Color(255, 0, 0));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(76, 102, 129, 34);
 		
 		contentPane.add(lblNewLabel);
@@ -170,7 +172,9 @@ public class HerramientaDeTesting extends JFrame {
        
 	
 		
-		JLabel lblNewLabel_1 = new JLabel("Analisis del metodo");
+		JLabel lblNewLabel_1 = new JLabel("Analisis del Metodo");
+		lblNewLabel_1.setForeground(new Color(255, 0, 0));
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel_1.setBounds(731, 112, 163, 14);
 		contentPane.add(lblNewLabel_1);
 		
@@ -235,6 +239,8 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JLabel lblCodigoFuente = new JLabel("Codigo fuente");
+		lblCodigoFuente.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCodigoFuente.setForeground(new Color(255, 0, 0));
 		lblCodigoFuente.setBounds(76, 336, 129, 34);
 		contentPane.add(lblCodigoFuente);
 		
@@ -306,7 +312,9 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(textField_9);
 		textField_9.setColumns(10);
 		
-		JLabel lblReporteDeAnalisis = new JLabel("Reporte de analisis");
+		JLabel lblReporteDeAnalisis = new JLabel("Reporte de Analisis");
+		lblReporteDeAnalisis.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblReporteDeAnalisis.setForeground(new Color(255, 0, 0));
 		lblReporteDeAnalisis.setBounds(574, 417, 261, 14);
 		contentPane.add(lblReporteDeAnalisis);
 
@@ -424,8 +432,8 @@ public class HerramientaDeTesting extends JFrame {
 			textField_5.setText(funciones.get(index).getFanIn()+"");
 			textField_6.setText(funciones.get(index).getFanOut()+"");
 			textField_7.setText(funciones.get(index).getLongitud()+"");
-			textField_8.setText(funciones.get(index).getVolumen()+"");
-			textField_9.setText(funciones.get(index).getEsfuerzo()+"");
+			textField_8.setText(String.format("%.2f", funciones.get(index).getVolumen()));
+			textField_9.setText(String.format("%.2f" , funciones.get(index).getEsfuerzo()));
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
 			resultados = false;
