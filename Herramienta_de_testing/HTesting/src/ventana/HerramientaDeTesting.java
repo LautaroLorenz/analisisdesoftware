@@ -81,7 +81,7 @@ public class HerramientaDeTesting extends JFrame {
 	private JTextField textField_4;
 
 	private JLabel lblComentarCodigo = new JLabel();
-
+	private JLabel lblModularizar = new JLabel();
 	private final Action action = new SwingAction();;
 	String ruta;
 	private List codigo = new List();
@@ -371,6 +371,8 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(lblReporteDeAnalisis);
 		contentPane.add(lblComentarCodigo);
 		lblComentarCodigo.setVisible(false);
+		contentPane.add(lblModularizar);
+		lblModularizar.setVisible(false);
 		JLabel lblPoweredByEquipo = new JLabel("Powered by Equipo 7 - Analisis de Software - 2019 ");
 		lblPoweredByEquipo.setForeground(new Color(128, 128, 128));
 		lblPoweredByEquipo.setBounds(20, 654, 305, 14);
@@ -461,6 +463,7 @@ public class HerramientaDeTesting extends JFrame {
 		textField_8.setText("");
 		textField_9.setText("");
 		lblComentarCodigo.setVisible(false);
+		lblModularizar.setVisible(false);
 		resultados=false;
 	}
 	
@@ -519,6 +522,16 @@ public class HerramientaDeTesting extends JFrame {
 			}
 			else
 				lblComentarCodigo.setVisible(false);
+			
+			if(Integer.valueOf(textField_4.getText()) > 10 ){
+				lblModularizar.setText("Hay que modularizar el metodo para bajar su complejidad ciclomatica");
+				lblModularizar.setBackground(new Color(128, 128, 128));
+				lblModularizar.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblModularizar.setBounds(575, 500, 400, 14);
+				lblModularizar.setVisible(true);
+			}
+			else
+				lblModularizar.setVisible(false);
 			
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
