@@ -79,7 +79,7 @@ public class HerramientaDeTesting extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-
+	JProgressBar progressBar = new JProgressBar();
 	private JLabel lblComentarCodigo = new JLabel();
 	private JLabel lblModularizar = new JLabel();
 	private JLabel lblTodoBien = new JLabel();
@@ -382,6 +382,15 @@ public class HerramientaDeTesting extends JFrame {
 		contentPane.add(lblPoweredByEquipo);
 		
 		
+		progressBar.setForeground(Color.GREEN);
+		progressBar.setBounds(679, 633, 156, 14);
+		contentPane.add(progressBar);
+		
+		JLabel lblNivelDeProgreso = new JLabel("Nivel de Progreso");
+		lblNivelDeProgreso.setBounds(711, 654, 146, 14);
+		contentPane.add(lblNivelDeProgreso);
+		
+		
 
 	}
 	private class SwingAction extends AbstractAction {
@@ -468,6 +477,7 @@ public class HerramientaDeTesting extends JFrame {
 		lblComentarCodigo.setVisible(false);
 		lblModularizar.setVisible(false);
 		lblTodoBien.setVisible(false);
+		progressBar.setValue(0);
 		resultados=false;
 	}
 	
@@ -530,8 +540,11 @@ public class HerramientaDeTesting extends JFrame {
 				lblComentarCodigo.setVisible(true);
 				
 			}
-			else
+			else {
 				lblComentarCodigo.setVisible(false);
+				progressBar.setValue(progressBar.getValue()+ 50);
+			}
+				
 			
 			if(Integer.valueOf(textField_4.getText()) > 10 ){
 				lblModularizar.setText("Hay que modularizar el metodo para bajar su complejidad ciclomatica");
@@ -540,8 +553,11 @@ public class HerramientaDeTesting extends JFrame {
 				lblModularizar.setBounds(575, 500, 400, 14);
 				lblModularizar.setVisible(true);
 			}
-			else
+			else {
 				lblModularizar.setVisible(false);
+				progressBar.setValue(progressBar.getValue()+ 50);
+			}
+				
 			
 			if(lblComentarCodigo.isVisible() == false && lblModularizar.isVisible() == false) {
 				lblTodoBien.setText("El metodo cumple con las metricas de mantenibilidad");
@@ -568,5 +584,4 @@ public class HerramientaDeTesting extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}}
-
 }
