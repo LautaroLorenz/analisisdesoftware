@@ -498,11 +498,17 @@ public class HerramientaDeTesting extends JFrame {
 	private void calcularValoresAnalisis(){
 		try{
 			int index = listMetodos.getSelectedIndex();
+			
 			int lineasCodigo = funciones.get(index).getLlaveCierreFun()-funciones.get(index).getNumLiniaIni()+1;
-
-			int porcentajeCodigoComentado = (funciones.get(index).getCantlineaComentario()* 100)/lineasCodigo;
+			int lineasComentadas =  funciones.get(index).getCantlineaComentario();
+			
+			//int porcentajeCodigoComentado = (funciones.get(index).getCantlineaComentario()* 100)/lineasCodigo;
+			int porcentajeCodigoComentado = (lineasComentadas* 100)/(lineasCodigo - lineasComentadas);
+			
+			
+			
 			resultados = true;
-			textField_1.setText(lineasCodigo+"");
+			textField_1.setText(lineasCodigo - lineasComentadas+"");
 			textField_2.setText(funciones.get(index).getCantlineaComentario()+"");
 			textField_3.setText(porcentajeCodigoComentado+" %");
 			textField_4.setText(funciones.get(index).getComplejidadCiclomatica()+"");
