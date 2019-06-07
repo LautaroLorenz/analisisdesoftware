@@ -82,6 +82,7 @@ public class HerramientaDeTesting extends JFrame {
 
 	private JLabel lblComentarCodigo = new JLabel();
 	private JLabel lblModularizar = new JLabel();
+	private JLabel lblTodoBien = new JLabel();
 	private final Action action = new SwingAction();;
 	String ruta;
 	private List codigo = new List();
@@ -373,6 +374,8 @@ public class HerramientaDeTesting extends JFrame {
 		lblComentarCodigo.setVisible(false);
 		contentPane.add(lblModularizar);
 		lblModularizar.setVisible(false);
+		contentPane.add(lblTodoBien);
+		lblTodoBien.setVisible(false);
 		JLabel lblPoweredByEquipo = new JLabel("Powered by Equipo 7 - Analisis de Software - 2019 ");
 		lblPoweredByEquipo.setForeground(new Color(128, 128, 128));
 		lblPoweredByEquipo.setBounds(20, 654, 305, 14);
@@ -464,6 +467,7 @@ public class HerramientaDeTesting extends JFrame {
 		textField_9.setText("");
 		lblComentarCodigo.setVisible(false);
 		lblModularizar.setVisible(false);
+		lblTodoBien.setVisible(false);
 		resultados=false;
 	}
 	
@@ -538,6 +542,14 @@ public class HerramientaDeTesting extends JFrame {
 			}
 			else
 				lblModularizar.setVisible(false);
+			
+			if(lblComentarCodigo.isVisible() == false && lblModularizar.isVisible() == false) {
+				lblTodoBien.setText("El metodo cumple con las metricas de mantenibilidad");
+				lblTodoBien.setBackground(new Color(128, 128, 128));
+				lblTodoBien.setFont(new Font("Tahoma", Font.BOLD, 11));
+				lblTodoBien.setBounds(600, 500, 400, 14);
+				lblTodoBien.setVisible(true);
+			}
 			
 		}catch(Exception e) {
 			//en caso de correr analisis sin seleccionar un metodo
