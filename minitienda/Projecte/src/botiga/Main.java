@@ -24,6 +24,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main extends javax.swing.JFrame
 {
@@ -168,11 +170,30 @@ public class Main extends javax.swing.JFrame
         jLabel21 = new javax.swing.JLabel();
         jlbNumProd = new javax.swing.JLabel();
         btnComprar = new javax.swing.JButton();
+        btnComprar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnComprar.setToolTipText("Al hacer clic confirma la compra de los productos seleccionados");
+        	}
+        });
         jLabel5 = new javax.swing.JLabel();
         jpnLogin = new javax.swing.JPanel();
         jlregistrate = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
+        txtPassword.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		txtPassword.setToolTipText("Escriba aquí su contraseña");
+        	}
+        });
         txtUser = new javax.swing.JTextField();
+        txtUser.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		txtUser.setToolTipText("Escriba aquí su nombre de usuario");
+        	}
+        });
+        
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jbnAceptar = new javax.swing.JButton();
