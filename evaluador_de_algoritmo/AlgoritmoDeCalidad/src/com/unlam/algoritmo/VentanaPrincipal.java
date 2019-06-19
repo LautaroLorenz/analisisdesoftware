@@ -28,8 +28,7 @@ public class VentanaPrincipal extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	//private String[] resSubCat = {"", "NO CUMPLE", "CUMPLE PARCIALMENTE", "CUMPLE"}; 
+	private static final long serialVersionUID = 1L; 
 	private JPanel contentPane;
 	private JPanel panelFuncionalidad;
 	private JPanel panelEficiencia;
@@ -64,6 +63,19 @@ public class VentanaPrincipal extends JFrame {
 	private JTextField textUsabC;
 	private JTextField textFPortA;
 	private JTextField textFPortB;
+	private int respFunA;
+	private int respFunB;
+	private int respEficA;
+	private int respEficB;
+	private int respEficC;
+	private int respMantA;
+	private int respMantB;
+	private int respMantC;
+	private int respUsabA;
+	private int respUsabB;
+	private int respUsabC;
+	private int respPortA;
+	private int respPortB;
 	private ArrayList<ButtonGroup> listaBG;
 	private JProgressBar progressBar;
 	private threadPB hiloBarra;
@@ -751,19 +763,22 @@ public class VentanaPrincipal extends JFrame {
 					JOptionPane.showMessageDialog(null, "Para avanzar debe seleccionar un item de cada subcategoría");
 				else
 				{
-					calcularResultados(textFunA, Integer.parseInt(bgFuncionalidadA.getSelection().getActionCommand()));
-					calcularResultados(textFunB, Integer.parseInt(bgFuncionalidadB.getSelection().getActionCommand()));
-					calcularResultados(textMantA, Integer.parseInt(bgMantenibilidadA.getSelection().getActionCommand()));
-					calcularResultados(textMantB, Integer.parseInt(bgMantenibilidadB.getSelection().getActionCommand()));
-					calcularResultados(textMantC, Integer.parseInt(bgMantenibilidadC.getSelection().getActionCommand()));
-					calcularResultados(textEficA, Integer.parseInt(bgEficienciaA.getSelection().getActionCommand()));
-					calcularResultados(textEficB, Integer.parseInt(bgEficienciaB.getSelection().getActionCommand()));
-					calcularResultados(textEficC, Integer.parseInt(bgEficienciaC.getSelection().getActionCommand()));
-					calcularResultados(textUsabA, Integer.parseInt(bgUsabilidadA.getSelection().getActionCommand()));
-					calcularResultados(textUsabB, Integer.parseInt(bgUsabilidadB.getSelection().getActionCommand()));
-					calcularResultados(textUsabC, Integer.parseInt(bgUsabilidadC.getSelection().getActionCommand()));
-					calcularResultados(textFPortA, Integer.parseInt(bgPortabilidadA.getSelection().getActionCommand()));
-					calcularResultados(textFPortB, Integer.parseInt(bgPortabilidadB.getSelection().getActionCommand()));
+					calcularResultados(textFunA, respFunA = Integer.parseInt(bgFuncionalidadA.getSelection().getActionCommand()));
+					calcularResultados(textFunB, respFunB = Integer.parseInt(bgFuncionalidadB.getSelection().getActionCommand()));
+					calcularResultados(textMantA, respMantA = Integer.parseInt(bgMantenibilidadA.getSelection().getActionCommand()));
+					calcularResultados(textMantB, respMantB = Integer.parseInt(bgMantenibilidadB.getSelection().getActionCommand()));
+					calcularResultados(textMantC, respMantC = Integer.parseInt(bgMantenibilidadC.getSelection().getActionCommand()));
+					calcularResultados(textEficA, respEficA = Integer.parseInt(bgEficienciaA.getSelection().getActionCommand()));
+					calcularResultados(textEficB, respEficB = Integer.parseInt(bgEficienciaB.getSelection().getActionCommand()));
+					calcularResultados(textEficC, respEficC = Integer.parseInt(bgEficienciaC.getSelection().getActionCommand()));
+					calcularResultados(textUsabA, respUsabA = Integer.parseInt(bgUsabilidadA.getSelection().getActionCommand()));
+					calcularResultados(textUsabB, respUsabB = Integer.parseInt(bgUsabilidadB.getSelection().getActionCommand()));
+					calcularResultados(textUsabC, respUsabC = Integer.parseInt(bgUsabilidadC.getSelection().getActionCommand()));
+					calcularResultados(textFPortA, respPortA = Integer.parseInt(bgPortabilidadA.getSelection().getActionCommand()));
+					calcularResultados(textFPortB, respPortB = Integer.parseInt(bgPortabilidadB.getSelection().getActionCommand()));
+					
+					calcularResultadoFinal();
+					
 					panelPortabilidad.setVisible(false);
 					panelResultados.setVisible(true);
 					lblProgreso.setVisible(false);
@@ -1014,13 +1029,15 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(lblUsabilidad11);
 		
 		JLabel lblResultadoFinal = new JLabel("RESULTADO FINAL");
-		lblResultadoFinal.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblResultadoFinal.setBounds(43, 437, 174, 19);
+		lblResultadoFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblResultadoFinal.setBounds(41, 423, 138, 19);
 		panelResultados.add(lblResultadoFinal);
 		
 		textResultado = new JTextField();
+		textResultado.setFont(new Font("Tahoma", Font.BOLD, 12));
+		textResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		textResultado.setEditable(false);
-		textResultado.setBounds(243, 438, 277, 20);
+		textResultado.setBounds(173, 424, 487, 20);
 		panelResultados.add(textResultado);
 		textResultado.setColumns(10);
 		
@@ -1227,5 +1244,27 @@ public class VentanaPrincipal extends JFrame {
 		public void stop() {
 			this.play = false;
 		}
+	}
+	
+	public void calcularResultadoFinal() {
+		
+		double funcionalidad = ((respFunA + respFunB ) / 2) * 0.3;
+		double eficiencia = ((respEficA + respEficB + respEficC) / 3) * 0.2;
+		double mantenibilidad = ((respMantA + respMantB + respMantC) / 3) * 0.1;
+		double usabilidad = ((respUsabA + respUsabB + respUsabC) / 3) * 0.2;
+		double portabilidad = ((respPortA + respPortB) / 2) * 0.2;
+		
+		double resultado = funcionalidad + eficiencia + mantenibilidad + usabilidad + portabilidad;
+		
+		if(resultado >= 1.5) {
+			
+			textResultado.setText("EL PRODUCTO SOFTWARE ANALIZADO APRUEBA EL MODELO DE CALIDAD");
+			textResultado.setBackground(Color.GREEN);
+			
+		}else {
+			textResultado.setText("EL PRODUCTO SOFTWARE ANALIZADO DESAPRUEBA EL MODELO DE CALIDAD");
+			textResultado.setBackground(Color.RED);
+		}
+		
 	}
 }
