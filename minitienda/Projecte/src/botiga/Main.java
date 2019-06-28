@@ -179,24 +179,37 @@ public class Main extends javax.swing.JFrame
         jLabel5 = new javax.swing.JLabel();
         jpnLogin = new javax.swing.JPanel();
         jlregistrate = new javax.swing.JLabel();
+        jlregistrate.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		jlregistrate.setToolTipText("Clic aqui para registrarse");
+        	}
+        });
+        
         txtPassword = new javax.swing.JPasswordField();
         txtPassword.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
-        		txtPassword.setToolTipText("Escriba aquí su contraseña");
+        		txtPassword.setToolTipText("Escriba aqui su contrasena");
         	}
         });
         txtUser = new javax.swing.JTextField();
         txtUser.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
-        		txtUser.setToolTipText("Escriba aquí su nombre de usuario");
+        		txtUser.setToolTipText("Escriba aqui su nombre de usuario");
         	}
         });
         
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jbnAceptar = new javax.swing.JButton();
+        jbnAceptar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		jbnAceptar.setToolTipText("Clic aqui para confirmar el usuario");
+        	}
+        });
 
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
