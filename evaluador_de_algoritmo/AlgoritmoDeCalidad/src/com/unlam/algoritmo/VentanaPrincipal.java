@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.TextField;
+
 import javax.swing.SwingConstants;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
@@ -77,6 +79,7 @@ public class VentanaPrincipal extends JFrame {
 	private int respPortA;
 	private int respPortB;
 	private ArrayList<ButtonGroup> listaBG;
+	private ArrayList<JTextField> listaTF;
 	private JProgressBar progressBar;
 	private threadPB hiloBarra;
 
@@ -115,10 +118,11 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(progressBar);
 		
 		listaBG = new ArrayList<>();
+		listaTF = new ArrayList<>();
 		hiloBarra = new threadPB();
 		new Thread(hiloBarra).start();
 		
-		JLabel lblProgreso = new JLabel("<html><p>Progreso de</p><p>   Evaluación</p><html>");
+		JLabel lblProgreso = new JLabel("<html><p>Progreso de</p><p>   Evaluación</p></html>");
 		lblProgreso.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblProgreso.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProgreso.setBounds(10, 449, 98, 29);
@@ -129,6 +133,7 @@ public class VentanaPrincipal extends JFrame {
 		panelFuncionalidad.setBounds(0, 0, 682, 489);
 		contentPane.add(panelFuncionalidad);
 		panelFuncionalidad.setLayout(null);
+		panelFuncionalidad.setVisible(true);
 		
 		JButton btnSalir_1 = new JButton("Salir");
 		btnSalir_1.setBackground(new Color(244, 164, 96));
@@ -183,6 +188,30 @@ public class VentanaPrincipal extends JFrame {
 		textAreaExactitudResult.setBounds(82, 207, 523, 46);
 		panelFuncionalidad.add(textAreaExactitudResult);
 		
+		JRadioButton rdbtnFunA3 = new JRadioButton("Requiere iniciar sesi\u00F3n y contrase\u00F1a encriptada");
+		rdbtnFunA3.setBackground(new Color(216, 191, 216));
+		rdbtnFunA3.setActionCommand("3");
+		rdbtnFunA3.setBounds(157, 107, 391, 23);
+		panelFuncionalidad.add(rdbtnFunA3);
+		
+		JRadioButton rdbtnFunA2 = new JRadioButton("S\u00F3lo requiere iniciar sesi\u00F3n");
+		rdbtnFunA2.setBackground(new Color(216, 191, 216));
+		rdbtnFunA2.setActionCommand("2");
+		rdbtnFunA2.setBounds(157, 133, 391, 23);
+		panelFuncionalidad.add(rdbtnFunA2);
+		
+		JRadioButton rdbtnFunA1 = new JRadioButton("No requiere iniciar sesi\u00F3n");
+		rdbtnFunA1.setBackground(new Color(216, 191, 216));
+		rdbtnFunA1.setActionCommand("1");
+		rdbtnFunA1.setBounds(157, 159, 391, 23);
+		panelFuncionalidad.add(rdbtnFunA1);
+		
+		bgFuncionalidadA = new ButtonGroup();
+		bgFuncionalidadA.add(rdbtnFunA3);
+		bgFuncionalidadA.add(rdbtnFunA2);
+		bgFuncionalidadA.add(rdbtnFunA1);
+		listaBG.add(bgFuncionalidadA);
+		
 		JRadioButton rdbtnFunB3 = new JRadioButton("Se utiliza una presi\u00F3n de 10-4 o superior");
 		rdbtnFunB3.setBackground(new Color(216, 191, 216));
 		rdbtnFunB3.setActionCommand("3");
@@ -206,30 +235,6 @@ public class VentanaPrincipal extends JFrame {
 		bgFuncionalidadB.add(rdbtnFunB2);
 		bgFuncionalidadB.add(rdbtnFunB1);
 		listaBG.add(bgFuncionalidadB);
-		
-		JRadioButton rdbtnFunA3 = new JRadioButton("Requiere iniciar sesi\u00F3n sesi\u00F3n y contrase\u00F1a encriptada");
-		rdbtnFunA3.setBackground(new Color(216, 191, 216));
-		rdbtnFunA3.setActionCommand("3");
-		rdbtnFunA3.setBounds(157, 107, 391, 23);
-		panelFuncionalidad.add(rdbtnFunA3);
-		
-		JRadioButton rdbtnFunA2 = new JRadioButton("S\u00F3lo requiere iniciar sesi\u00F3n");
-		rdbtnFunA2.setBackground(new Color(216, 191, 216));
-		rdbtnFunA2.setActionCommand("2");
-		rdbtnFunA2.setBounds(157, 133, 391, 23);
-		panelFuncionalidad.add(rdbtnFunA2);
-		
-		JRadioButton rdbtnFunA1 = new JRadioButton("No requiere iniciar sesi\u00F3n");
-		rdbtnFunA1.setBackground(new Color(216, 191, 216));
-		rdbtnFunA1.setActionCommand("1");
-		rdbtnFunA1.setBounds(157, 159, 391, 23);
-		panelFuncionalidad.add(rdbtnFunA1);
-		
-		bgFuncionalidadA = new ButtonGroup();
-		bgFuncionalidadA.add(rdbtnFunA3);
-		bgFuncionalidadA.add(rdbtnFunA2);
-		bgFuncionalidadA.add(rdbtnFunA1);
-		listaBG.add(bgFuncionalidadA);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(101, 189, 453, 7);
@@ -264,7 +269,7 @@ public class VentanaPrincipal extends JFrame {
 		btnSiguiente_2.setBounds(583, 455, 89, 23);
 		panelEficiencia.add(btnSiguiente_2);
 		
-		JButton btnAtras_2 = new JButton("Atras");
+		JButton btnAtras_2 = new JButton("Atr\u00E1s");
 		btnAtras_2.setBackground(new Color(102, 205, 170));
 		btnAtras_2.addActionListener(new ActionListener() {
 			
@@ -303,8 +308,8 @@ public class VentanaPrincipal extends JFrame {
 		txtrAUtilizacionDel.setBackground(new Color(250, 128, 114));
 		txtrAUtilizacionDel.setEditable(false);
 		txtrAUtilizacionDel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrAUtilizacionDel.setText("  a) Utilizaci\u00F3n del procesador:  Se evaluara la eficiencia de acuerdo con el porcentaje de uso del procesador\r\n \t\t       (NOTA: Debe ser evaluado en un procesador de la seri Intel I3, I5, o I7\r\n\t\t        de cualquier generaci\u00F3n)");
-		txtrAUtilizacionDel.setBounds(64, 44, 536, 46);
+		txtrAUtilizacionDel.setText("  a) Utilizaci\u00F3n del procesador:  Se evaluar\u00E1 la eficiencia de acuerdo con el porcentaje de uso del procesador\r\n \t\t       (NOTA: Debe ser evaluado en un procesador de la serie Intel I3, I5, o I7\r\n\t\t        de cualquier generaci\u00F3n)");
+		txtrAUtilizacionDel.setBounds(64, 39, 536, 46);
 		panelEficiencia.add(txtrAUtilizacionDel);
 		
 		JRadioButton rdbtnEficA3 = new JRadioButton("Se utiliza menos del 10%");
@@ -316,7 +321,7 @@ public class VentanaPrincipal extends JFrame {
 		JRadioButton rdbtnEficA2 = new JRadioButton("Se utiliza entre 10% y 40%");
 		rdbtnEficA2.setBackground(new Color(216, 191, 216));
 		rdbtnEficA2.setActionCommand("2");
-		rdbtnEficA2.setBounds(198, 117, 289, 23);
+		rdbtnEficA2.setBounds(198, 118, 289, 23);
 		panelEficiencia.add(rdbtnEficA2);
 		
 		JRadioButton rdbtnEficA1 = new JRadioButton("Se utiliza m\u00E1s del 40%");
@@ -338,7 +343,7 @@ public class VentanaPrincipal extends JFrame {
 		JTextArea txtrBUtilizacinDel = new JTextArea();
 		txtrBUtilizacinDel.setBackground(new Color(250, 128, 114));
 		txtrBUtilizacinDel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrBUtilizacinDel.setText("  b) Utilizaci\u00F3n del disco r\u00EDgido: Se evaluar\u00E1 de acuerdo al porcentaje de uso del disco rigido. Debera ser\r\n\t\t      evaluado con un disco de 7200 rpm o m\u00E1s, o con un disco de estado solido de\r\n\t\t      cualquier generacion. El espacio del disco no puede ser inferior a 240GB.");
+		txtrBUtilizacinDel.setText("  b) Utilizaci\u00F3n del disco r\u00EDgido: Se evaluar\u00E1 de acuerdo al porcentaje de uso del disco r\u00EDgido. Deber\u00E1 ser\r\n\t\t      evaluado con un disco de 7200 rpm o m\u00E1s, o con un disco de estado s\u00F3lido de\r\n\t\t      cualquier generaci\u00F3n. El espacio del disco no puede ser inferior a 240GB.");
 		txtrBUtilizacinDel.setEditable(false);
 		txtrBUtilizacinDel.setBounds(64, 181, 536, 46);
 		panelEficiencia.add(txtrBUtilizacinDel);
@@ -355,7 +360,7 @@ public class VentanaPrincipal extends JFrame {
 		rdbtnEficB2.setBounds(198, 260, 289, 23);
 		panelEficiencia.add(rdbtnEficB2);
 		
-		JRadioButton rdbtnEficB1 = new JRadioButton("Se utiliza mas del 60%");
+		JRadioButton rdbtnEficB1 = new JRadioButton("Se utiliza m\u00E1s del 60%");
 		rdbtnEficB1.setBackground(new Color(216, 191, 216));
 		rdbtnEficB1.setActionCommand("1");
 		rdbtnEficB1.setBounds(198, 286, 289, 23);
@@ -378,19 +383,19 @@ public class VentanaPrincipal extends JFrame {
 		JRadioButton rdbtnEficC3 = new JRadioButton("Utiliza menos de 100MB");
 		rdbtnEficC3.setBackground(new Color(216, 191, 216));
 		rdbtnEficC3.setActionCommand("3");
-		rdbtnEficC3.setBounds(198, 373, 289, 23);
+		rdbtnEficC3.setBounds(198, 369, 289, 23);
 		panelEficiencia.add(rdbtnEficC3);
 		
 		JRadioButton rdbtnEficC2 = new JRadioButton("Utiliza entre 100MB y 500MB");
 		rdbtnEficC2.setBackground(new Color(216, 191, 216));
 		rdbtnEficC2.setActionCommand("2");
-		rdbtnEficC2.setBounds(198, 399, 289, 23);
+		rdbtnEficC2.setBounds(198, 395, 289, 23);
 		panelEficiencia.add(rdbtnEficC2);
 		
-		JRadioButton rdbtnEficC1 = new JRadioButton("Utiliza mas de 500MB");
+		JRadioButton rdbtnEficC1 = new JRadioButton("Utiliza m\u00E1s de 500MB");
 		rdbtnEficC1.setBackground(new Color(216, 191, 216));
 		rdbtnEficC1.setActionCommand("1");
-		rdbtnEficC1.setBounds(198, 425, 289, 23);
+		rdbtnEficC1.setBounds(198, 421, 289, 23);
 		panelEficiencia.add(rdbtnEficC1);
 		
 		bgEficienciaC = new ButtonGroup();
@@ -432,7 +437,7 @@ public class VentanaPrincipal extends JFrame {
 		btnSiguiente_3.setBounds(583, 455, 89, 23);
 		panelMantenibilidad.add(btnSiguiente_3);
 		
-		JButton btnAtras_3 = new JButton("Atras");
+		JButton btnAtras_3 = new JButton("Atr\u00E1s");
 		btnAtras_3.setBackground(new Color(102, 205, 170));
 		btnAtras_3.addActionListener(new ActionListener() {
 			
@@ -471,27 +476,27 @@ public class VentanaPrincipal extends JFrame {
 		txtrACapacidadDel.setBackground(new Color(250, 128, 114));
 		txtrACapacidadDel.setEditable(false);
 		txtrACapacidadDel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrACapacidadDel.setText("  a) Capacidad del codigo de ser analizado: Para evaluar la capacidad que tiene el c\u00F3digo de ser analizado se\r\n\t\t\t     tendr\u00E1 en cuenta el porcentaje de comentarios que posee el c\u00F3digo\r\n\t\t\t     por cada m\u00E9todo.");
+		txtrACapacidadDel.setText("  a) Capacidad del c\u00F3digo de ser analizado: Para evaluar la capacidad que tiene el c\u00F3digo de ser analizado se\r\n\t\t\t     tendr\u00E1 en cuenta el porcentaje de comentarios que posee el c\u00F3digo\r\n\t\t\t     por cada m\u00E9todo.");
 		txtrACapacidadDel.setToolTipText("");
-		txtrACapacidadDel.setBounds(60, 55, 552, 46);
+		txtrACapacidadDel.setBounds(60, 49, 552, 46);
 		panelMantenibilidad.add(txtrACapacidadDel);
 		
 		JRadioButton rdbtnMantA3 = new JRadioButton("C\u00F3digo comentado mayor a 30%");
 		rdbtnMantA3.setBackground(new Color(216, 191, 216));
 		rdbtnMantA3.setActionCommand("3");
-		rdbtnMantA3.setBounds(175, 105, 398, 23);
+		rdbtnMantA3.setBounds(175, 102, 398, 23);
 		panelMantenibilidad.add(rdbtnMantA3);
 		
 		JRadioButton rdbtnMantA2 = new JRadioButton("C\u00F3digo comentado entre 30% y 10%");
 		rdbtnMantA2.setBackground(new Color(216, 191, 216));
 		rdbtnMantA2.setActionCommand("2");
-		rdbtnMantA2.setBounds(175, 131, 398, 23);
+		rdbtnMantA2.setBounds(175, 128, 398, 23);
 		panelMantenibilidad.add(rdbtnMantA2);
 		
-		JRadioButton rdbtnMantA1 = new JRadioButton("C\u00F3digo comentado inferior a 30%");
+		JRadioButton rdbtnMantA1 = new JRadioButton("C\u00F3digo comentado inferior a 10%");
 		rdbtnMantA1.setBackground(new Color(216, 191, 216));
 		rdbtnMantA1.setActionCommand("1");
-		rdbtnMantA1.setBounds(175, 157, 398, 23);
+		rdbtnMantA1.setBounds(175, 154, 398, 23);
 		panelMantenibilidad.add(rdbtnMantA1);
 		
 		bgMantenibilidadA = new ButtonGroup();
@@ -501,33 +506,33 @@ public class VentanaPrincipal extends JFrame {
 		listaBG.add(bgMantenibilidadA);
 		
 		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(86, 187, 487, 2);
+		separator_2.setBounds(86, 184, 507, 2);
 		panelMantenibilidad.add(separator_2);
 		
 		JTextArea txtrBCapacidadDel = new JTextArea();
 		txtrBCapacidadDel.setBackground(new Color(250, 128, 114));
 		txtrBCapacidadDel.setEditable(false);
 		txtrBCapacidadDel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrBCapacidadDel.setText("   b) Capacidad del c\u00F3digo de ser cambiado: Se tomar\u00E1 en cuenta la complejidad ciclom\u00E1ticadel metodo alta del\r\n\t\t   \t      producto.");
-		txtrBCapacidadDel.setBounds(60, 200, 552, 32);
+		txtrBCapacidadDel.setText("   b) Capacidad del c\u00F3digo de ser cambiado: Se tomar\u00E1 en cuenta la complejidad ciclom\u00E1tica del m\u00E9todo alta del\r\n\t\t   \t      producto.");
+		txtrBCapacidadDel.setBounds(60, 195, 552, 32);
 		panelMantenibilidad.add(txtrBCapacidadDel);
 		
 		JRadioButton rdbtnMantB3 = new JRadioButton("La complejidad ciclom\u00E1tica es inferior a 11");
 		rdbtnMantB3.setBackground(new Color(216, 191, 216));
 		rdbtnMantB3.setActionCommand("3");
-		rdbtnMantB3.setBounds(175, 239, 398, 23);
+		rdbtnMantB3.setBounds(175, 234, 398, 23);
 		panelMantenibilidad.add(rdbtnMantB3);
 		
 		JRadioButton rdbtnMantB2 = new JRadioButton("La complejidad ciclom\u00E1tica est\u00E1 entre 11 y 21");
 		rdbtnMantB2.setBackground(new Color(216, 191, 216));
 		rdbtnMantB2.setActionCommand("2");
-		rdbtnMantB2.setBounds(175, 265, 398, 23);
+		rdbtnMantB2.setBounds(175, 260, 398, 23);
 		panelMantenibilidad.add(rdbtnMantB2);
 		
 		JRadioButton rdbtnMantB1 = new JRadioButton("La complejidad ciclom\u00E1tica supera los 21");
 		rdbtnMantB1.setBackground(new Color(216, 191, 216));
 		rdbtnMantB1.setActionCommand("1");
-		rdbtnMantB1.setBounds(175, 291, 398, 23);
+		rdbtnMantB1.setBounds(175, 286, 398, 23);
 		panelMantenibilidad.add(rdbtnMantB1);
 		
 		bgMantenibilidadB = new ButtonGroup();
@@ -537,7 +542,7 @@ public class VentanaPrincipal extends JFrame {
 		listaBG.add(bgMantenibilidadB);
 		
 		JSeparator separator_3 = new JSeparator();
-		separator_3.setBounds(86, 321, 487, 2);
+		separator_3.setBounds(86, 314, 507, 2);
 		panelMantenibilidad.add(separator_3);
 		
 		JTextArea txtrCEstabilidadPara = new JTextArea();
@@ -545,25 +550,25 @@ public class VentanaPrincipal extends JFrame {
 		txtrCEstabilidadPara.setEditable(false);
 		txtrCEstabilidadPara.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtrCEstabilidadPara.setText("   c) Estabilidad: Para determinar la estabilidad del software se eval\u00FAa la cantidad de fallas que presenta el \r\n  \t     producto durante el per\u00EDodo de prueba de estabilidad.");
-		txtrCEstabilidadPara.setBounds(60, 334, 552, 32);
+		txtrCEstabilidadPara.setBounds(60, 327, 552, 32);
 		panelMantenibilidad.add(txtrCEstabilidadPara);
 		
-		JRadioButton rdbtnMantC3 = new JRadioButton("La cantidad de fallas es mayor a 7");
+		JRadioButton rdbtnMantC3 = new JRadioButton("La cantidad de fallas es inferior a 4");
 		rdbtnMantC3.setBackground(new Color(216, 191, 216));
 		rdbtnMantC3.setActionCommand("3");
-		rdbtnMantC3.setBounds(175, 373, 398, 23);
+		rdbtnMantC3.setBounds(175, 366, 398, 23);
 		panelMantenibilidad.add(rdbtnMantC3);
 		
-		JRadioButton rdbtnMantC2 = new JRadioButton("La cantidad de fallas est\u00E1 entre 7 y 4");
+		JRadioButton rdbtnMantC2 = new JRadioButton("La cantidad de fallas est\u00E1 entre 4 y 7");
 		rdbtnMantC2.setBackground(new Color(216, 191, 216));
 		rdbtnMantC2.setActionCommand("2");
-		rdbtnMantC2.setBounds(175, 399, 398, 23);
+		rdbtnMantC2.setBounds(175, 392, 398, 23);
 		panelMantenibilidad.add(rdbtnMantC2);
 		
-		JRadioButton rdbtnMantC1 = new JRadioButton("La cantidad de fallas es inferior a 4");
+		JRadioButton rdbtnMantC1 = new JRadioButton("La cantidad de fallas es superior a 7");
 		rdbtnMantC1.setBackground(new Color(216, 191, 216));
 		rdbtnMantC1.setActionCommand("1");
-		rdbtnMantC1.setBounds(175, 425, 398, 23);
+		rdbtnMantC1.setBounds(175, 418, 398, 23);
 		panelMantenibilidad.add(rdbtnMantC1);
 		
 		bgMantenibilidadC = new ButtonGroup();
@@ -573,7 +578,7 @@ public class VentanaPrincipal extends JFrame {
 		listaBG.add(bgMantenibilidadC);
 		
 		JSeparator separator__ = new JSeparator();
-		separator__.setBounds(86, 40, 487, 2);
+		separator__.setBounds(86, 36, 507, 6);
 		panelMantenibilidad.add(separator__);
 		
 		
@@ -608,7 +613,7 @@ public class VentanaPrincipal extends JFrame {
 		btnSiguiente_4.setBounds(583, 455, 89, 23);
 		panelUsabilidad.add(btnSiguiente_4);
 		
-		JButton btnAtras_4 = new JButton("Atras");
+		JButton btnAtras_4 = new JButton("Atr\u00E1s");
 		btnAtras_4.setBackground(new Color(102, 205, 170));
 		btnAtras_4.addActionListener(new ActionListener() {
 			
@@ -642,7 +647,7 @@ public class VentanaPrincipal extends JFrame {
 		txtrAinstalabilidadElSoftware.setEditable(false);
 		txtrAinstalabilidadElSoftware.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtrAinstalabilidadElSoftware.setText("  a) Capacidad de ser entendido: Capacidad que posee el software de ayudar a los usuarios ante una\r\n\t\t          determinada situaci\u00F3n donde se necesite asistencia.");
-		txtrAinstalabilidadElSoftware.setBounds(70, 36, 554, 32);
+		txtrAinstalabilidadElSoftware.setBounds(70, 38, 554, 32);
 		panelUsabilidad.add(txtrAinstalabilidadElSoftware);
 		
 		JRadioButton rdbtnUsabA3 = new JRadioButton("Posee ayuda contextual sobre botones de acci\u00F3n Y manual de usuario incorporado");
@@ -657,7 +662,7 @@ public class VentanaPrincipal extends JFrame {
 		rdbtnUsabA2.setBounds(111, 101, 513, 23);
 		panelUsabilidad.add(rdbtnUsabA2);
 		
-		JRadioButton rdbtnUsabA1 = new JRadioButton("No posee ayuda ningun tipo de ayuda");
+		JRadioButton rdbtnUsabA1 = new JRadioButton("No posee ningun tipo de ayuda");
 		rdbtnUsabA1.setBackground(new Color(216, 191, 216));
 		rdbtnUsabA1.setActionCommand("1");
 		rdbtnUsabA1.setBounds(111, 127, 513, 25);
@@ -678,25 +683,25 @@ public class VentanaPrincipal extends JFrame {
 		txtrBCapacidadDe.setEditable(false);
 		txtrBCapacidadDe.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtrBCapacidadDe.setText("  b) Capacidad de ser operado: Es la capacidad del producto de ser utilizado sin asistencia adicional. Se eval\u00FAa\r\n\t\t       que requiere el usuario para operar correctamente el producto.");
-		txtrBCapacidadDe.setBounds(70, 162, 554, 34);
+		txtrBCapacidadDe.setBounds(70, 165, 554, 34);
 		panelUsabilidad.add(txtrBCapacidadDe);
 		
 		JRadioButton rdbtnUsabB3 = new JRadioButton("<html><p>El usuario puede operar el producto sin necesidad de recurrir a asistencia externa</p> <p>a la que puede encontrar dentro del producto</p></html>");
 		rdbtnUsabB3.setBackground(new Color(216, 191, 216));
 		rdbtnUsabB3.setActionCommand("3");
-		rdbtnUsabB3.setBounds(111, 203, 513, 32);
+		rdbtnUsabB3.setBounds(111, 206, 513, 32);
 		panelUsabilidad.add(rdbtnUsabB3);
 		
 		JRadioButton rdbtnUsabB2 = new JRadioButton("El usuario requiere consultar el manual de uso impreso para poder operar el producto");
 		rdbtnUsabB2.setBackground(new Color(216, 191, 216));
 		rdbtnUsabB2.setActionCommand("2");
-		rdbtnUsabB2.setBounds(111, 239, 513, 23);
+		rdbtnUsabB2.setBounds(111, 241, 513, 23);
 		panelUsabilidad.add(rdbtnUsabB2);
 		
 		JRadioButton rdbtnUsabB1 = new JRadioButton("<html><p>El usuario requiere consultar a personal especializado m\u00E1s de 5 veces en un per\u00EDodo</p> <p>de tiempo para operar el producto software</p></html>");
 		rdbtnUsabB1.setBackground(new Color(216, 191, 216));
 		rdbtnUsabB1.setActionCommand("1");
-		rdbtnUsabB1.setBounds(111, 273, 513, 32);
+		rdbtnUsabB1.setBounds(111, 267, 513, 32);
 		panelUsabilidad.add(rdbtnUsabB1);
 		
 		bgUsabilidadB = new ButtonGroup();
@@ -706,33 +711,33 @@ public class VentanaPrincipal extends JFrame {
 		listaBG.add(bgUsabilidadB);
 		
 		JSeparator separator_5 = new JSeparator();
-		separator_5.setBounds(70, 312, 533, 2);
+		separator_5.setBounds(66, 306, 533, 2);
 		panelUsabilidad.add(separator_5);
 		
 		JTextArea txtrCCapacidadDe = new JTextArea();
 		txtrCCapacidadDe.setBackground(new Color(250, 128, 114));
 		txtrCCapacidadDe.setEditable(false);
 		txtrCCapacidadDe.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		txtrCCapacidadDe.setText("  c) Capacidad de ser atractivo para el usuario: Es la agrupaci\u00F3n correcta de funcionalidad de l producto software\r\n\t\t\t       en su interf\u00E1z gr\u00E1fica, desde su agrupacion l\u00F3gica hasta el n\u00FAmero\r\n\t\t\t       promedio  de pasos  para alcanzar una funci\u00F3n o contenido espec\u00EDfico.");
-		txtrCCapacidadDe.setBounds(70, 323, 554, 45);
+		txtrCCapacidadDe.setText("  c) Capacidad de ser atractivo para el usuario: Es la agrupaci\u00F3n correcta de funcionalidad del producto software\r\n\t\t\t       en su interf\u00E1z gr\u00E1fica, desde su agrupaci\u00F3n l\u00F3gica hasta el n\u00FAmero\r\n\t\t\t       promedio de pasos para alcanzar una funci\u00F3n o contenido espec\u00EDfico.");
+		txtrCCapacidadDe.setBounds(70, 314, 554, 45);
 		panelUsabilidad.add(txtrCCapacidadDe);
 		
 		JRadioButton rdbtnUsabC3 = new JRadioButton("La cantidad de pasos es inferior a 4");
 		rdbtnUsabC3.setBackground(new Color(216, 191, 216));
 		rdbtnUsabC3.setActionCommand("3");
-		rdbtnUsabC3.setBounds(111, 374, 475, 23);
+		rdbtnUsabC3.setBounds(111, 366, 475, 23);
 		panelUsabilidad.add(rdbtnUsabC3);
 		
 		JRadioButton rdbtnUsabC2 = new JRadioButton("La cantidad de pasos est\u00E1 entre 5 y 7");
 		rdbtnUsabC2.setBackground(new Color(216, 191, 216));
 		rdbtnUsabC2.setActionCommand("2");
-		rdbtnUsabC2.setBounds(111, 400, 475, 23);
+		rdbtnUsabC2.setBounds(111, 392, 475, 23);
 		panelUsabilidad.add(rdbtnUsabC2);
 		
 		JRadioButton rdbtnUsabC1 = new JRadioButton("la cantidad de pasos es superior a 7");
 		rdbtnUsabC1.setBackground(new Color(216, 191, 216));
 		rdbtnUsabC1.setActionCommand("1");
-		rdbtnUsabC1.setBounds(111, 425, 475, 23);
+		rdbtnUsabC1.setBounds(111, 418, 475, 23);
 		panelUsabilidad.add(rdbtnUsabC1);
 		
 		bgUsabilidadC = new ButtonGroup();
@@ -779,6 +784,8 @@ public class VentanaPrincipal extends JFrame {
 					
 					calcularResultadoFinal();
 					
+					mostrarSubcategoriaElegida(listaBG, listaTF);
+					
 					panelPortabilidad.setVisible(false);
 					panelResultados.setVisible(true);
 					lblProgreso.setVisible(false);
@@ -791,7 +798,7 @@ public class VentanaPrincipal extends JFrame {
 		btnEvaluar_5.setBounds(583, 455, 89, 23);
 		panelPortabilidad.add(btnEvaluar_5);
 		
-		JButton btnAtras_5 = new JButton("Atras");
+		JButton btnAtras_5 = new JButton("Atr\u00E1s");
 		btnAtras_5.setBackground(new Color(102, 205, 170));
 		btnAtras_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -830,7 +837,7 @@ public class VentanaPrincipal extends JFrame {
 		JTextArea txtrAInstalabilidadEl = new JTextArea();
 		txtrAInstalabilidadEl.setBackground(new Color(250, 128, 114));
 		txtrAInstalabilidadEl.setEditable(false);
-		txtrAInstalabilidadEl.setText("   a) Instalabilidad: El software debe poder ser instalado en una cantidad minima de pasos.");
+		txtrAInstalabilidadEl.setText("   a) Instalabilidad: El software debe poder ser instalado en una cantidad m\u00EDnima de pasos.");
 		txtrAInstalabilidadEl.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		txtrAInstalabilidadEl.setBounds(74, 44, 547, 23);
 		panelPortabilidad.add(txtrAInstalabilidadEl);
@@ -844,13 +851,13 @@ public class VentanaPrincipal extends JFrame {
 		JRadioButton rdbtnPortA2 = new JRadioButton("El producto se instala en menos de 3 pasos");
 		rdbtnPortA2.setBackground(new Color(216, 191, 216));
 		rdbtnPortA2.setActionCommand("2");
-		rdbtnPortA2.setBounds(175, 119, 371, 23);
+		rdbtnPortA2.setBounds(175, 117, 371, 23);
 		panelPortabilidad.add(rdbtnPortA2);
 		
 		JRadioButton rdbtnPortA1 = new JRadioButton("El producto se instala en 3 pasos o m\u00E1s");
 		rdbtnPortA1.setBackground(new Color(216, 191, 216));
 		rdbtnPortA1.setActionCommand("1");
-		rdbtnPortA1.setBounds(175, 150, 371, 23);
+		rdbtnPortA1.setBounds(175, 148, 371, 23);
 		panelPortabilidad.add(rdbtnPortA1);
 		
 		bgPortabilidadA = new ButtonGroup();
@@ -880,13 +887,13 @@ public class VentanaPrincipal extends JFrame {
 		JRadioButton rdbtnPortB2 = new JRadioButton("El producto es compatible con 2 sistemas operativos");
 		rdbtnPortB2.setBackground(new Color(216, 191, 216));
 		rdbtnPortB2.setActionCommand("2");
-		rdbtnPortB2.setBounds(175, 263, 371, 23);
+		rdbtnPortB2.setBounds(175, 270, 371, 23);
 		panelPortabilidad.add(rdbtnPortB2);
 		
 		JRadioButton rdbtnPortB1 = new JRadioButton("El producto es compatible con un sistema operativo");
 		rdbtnPortB1.setBackground(new Color(216, 191, 216));
 		rdbtnPortB1.setActionCommand("1");
-		rdbtnPortB1.setBounds(175, 289, 371, 23);
+		rdbtnPortB1.setBounds(175, 303, 371, 23);
 		panelPortabilidad.add(rdbtnPortB1);
 		
 		bgPortabilidadB = new ButtonGroup();
@@ -900,7 +907,7 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.setBounds(0, 0, 682, 489);
 		contentPane.add(panelResultados);
 		panelResultados.setLayout(null);
-		panelResultados.setVisible(true);
+		panelResultados.setVisible(false);
 		
 		JLabel lblResultadosDeLa = new JLabel("RESULTADOS DE LA EVALUACI\u00D3N");
 		lblResultadosDeLa.setHorizontalAlignment(SwingConstants.CENTER);
@@ -914,7 +921,6 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(separator11);
 		
 		JLabel lblFuncionalidad = new JLabel("FUNCIONALIDAD");
-		lblFuncionalidad.setForeground(Color.BLACK);
 		lblFuncionalidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblFuncionalidad.setBounds(41, 88, 123, 16);
 		panelResultados.add(lblFuncionalidad);
@@ -935,13 +941,11 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(lblResultados);
 		
 		JLabel lblSeguridadDeAcceso = new JLabel("SEGURIDAD DE ACCESO");
-		lblSeguridadDeAcceso.setForeground(Color.BLACK);
 		lblSeguridadDeAcceso.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSeguridadDeAcceso.setBounds(204, 76, 174, 14);
+		lblSeguridadDeAcceso.setBounds(206, 76, 174, 14);
 		panelResultados.add(lblSeguridadDeAcceso);
 		
 		JLabel lblNewLabel = new JLabel("EX\u00C1CTITUD DE LOS RESULTADOS");
-		lblNewLabel.setForeground(Color.BLACK);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblNewLabel.setBounds(206, 101, 208, 14);
 		panelResultados.add(lblNewLabel);
@@ -967,25 +971,21 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(lblNewLabel_2);
 		
 		JLabel lblMantenibilidad = new JLabel("MANTENIBILIDAD");
-		lblMantenibilidad.setForeground(Color.BLACK);
 		lblMantenibilidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblMantenibilidad.setBounds(41, 226, 123, 14);
 		panelResultados.add(lblMantenibilidad);
 		
 		JLabel lblACapacidadDel = new JLabel("CAPACIDAD DEL C\u00D3DIGO DE SER ANALIZADO");
-		lblACapacidadDel.setForeground(Color.BLACK);
 		lblACapacidadDel.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblACapacidadDel.setBounds(206, 201, 285, 14);
 		panelResultados.add(lblACapacidadDel);
 		
 		JLabel lblCapacidadDelCdigo = new JLabel("CAPACIDAD DEL C\u00D3DIGO DE SER CAMBIADO");
-		lblCapacidadDelCdigo.setForeground(Color.BLACK);
 		lblCapacidadDelCdigo.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCapacidadDelCdigo.setBounds(206, 226, 285, 14);
 		panelResultados.add(lblCapacidadDelCdigo);
 		
 		JLabel lblEstabilidad = new JLabel("ESTABILIDAD");
-		lblEstabilidad.setForeground(Color.BLACK);
 		lblEstabilidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblEstabilidad.setBounds(206, 251, 285, 14);
 		panelResultados.add(lblEstabilidad);
@@ -995,7 +995,7 @@ public class VentanaPrincipal extends JFrame {
 		lblCapacidadDeSer.setBounds(206, 276, 264, 14);
 		panelResultados.add(lblCapacidadDeSer);
 		
-		JLabel lblCapacidadDeSer_1 = new JLabel("CAPACIDAD DE SER ENTENDIDO");
+		JLabel lblCapacidadDeSer_1 = new JLabel("CAPACIDAD DE SER OPERADO");
 		lblCapacidadDeSer_1.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblCapacidadDeSer_1.setBounds(206, 301, 285, 14);
 		panelResultados.add(lblCapacidadDeSer_1);
@@ -1006,19 +1006,16 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(lblCapacidadDeSer_2);
 		
 		JLabel lblPortabilidad11 = new JLabel("PORTABILIDAD");
-		lblPortabilidad11.setForeground(Color.BLACK);
 		lblPortabilidad11.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblPortabilidad11.setBounds(41, 362, 114, 14);
 		panelResultados.add(lblPortabilidad11);
 		
 		JLabel lblInstalabilidad = new JLabel("INSTALABILIDAD");
-		lblInstalabilidad.setForeground(Color.BLACK);
 		lblInstalabilidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblInstalabilidad.setBounds(206, 351, 264, 14);
 		panelResultados.add(lblInstalabilidad);
 		
 		JLabel lblAdaptabilidad = new JLabel("ADAPTABILIDAD");
-		lblAdaptabilidad.setForeground(Color.BLACK);
 		lblAdaptabilidad.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAdaptabilidad.setBounds(206, 376, 264, 14);
 		panelResultados.add(lblAdaptabilidad);
@@ -1029,6 +1026,7 @@ public class VentanaPrincipal extends JFrame {
 		panelResultados.add(lblUsabilidad11);
 		
 		JLabel lblResultadoFinal = new JLabel("RESULTADO FINAL");
+		lblResultadoFinal.setForeground(Color.BLACK);
 		lblResultadoFinal.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblResultadoFinal.setBounds(41, 423, 138, 19);
 		panelResultados.add(lblResultadoFinal);
@@ -1048,6 +1046,7 @@ public class VentanaPrincipal extends JFrame {
 		textFunA.setBounds(530, 74, 130, 20);
 		panelResultados.add(textFunA);
 		textFunA.setColumns(10);
+		listaTF.add(textFunA);
 		
 		textFunB = new JTextField();
 		textFunB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1056,6 +1055,7 @@ public class VentanaPrincipal extends JFrame {
 		textFunB.setBounds(530, 99, 130, 20);
 		panelResultados.add(textFunB);
 		textFunB.setColumns(10);
+		listaTF.add(textFunB);
 		
 		textEficA = new JTextField();
 		textEficA.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1064,6 +1064,7 @@ public class VentanaPrincipal extends JFrame {
 		textEficA.setBounds(530, 124, 130, 20);
 		panelResultados.add(textEficA);
 		textEficA.setColumns(10);
+		listaTF.add(textEficA);
 		
 		textEficB = new JTextField();
 		textEficB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1072,6 +1073,7 @@ public class VentanaPrincipal extends JFrame {
 		textEficB.setBounds(530, 149, 130, 20);
 		panelResultados.add(textEficB);
 		textEficB.setColumns(10);
+		listaTF.add(textEficB);
 		
 		textEficC = new JTextField();
 		textEficC.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1080,6 +1082,7 @@ public class VentanaPrincipal extends JFrame {
 		textEficC.setBounds(530, 174, 130, 20);
 		panelResultados.add(textEficC);
 		textEficC.setColumns(10);
+		listaTF.add(textEficC);
 		
 		textMantA = new JTextField();
 		textMantA.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1088,6 +1091,7 @@ public class VentanaPrincipal extends JFrame {
 		textMantA.setBounds(530, 199, 130, 20);
 		panelResultados.add(textMantA);
 		textMantA.setColumns(10);
+		listaTF.add(textMantA);
 		
 		textMantB = new JTextField();
 		textMantB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1096,6 +1100,7 @@ public class VentanaPrincipal extends JFrame {
 		textMantB.setBounds(530, 224, 130, 20);
 		panelResultados.add(textMantB);
 		textMantB.setColumns(10);
+		listaTF.add(textMantB);
 		
 		textMantC = new JTextField();
 		textMantC.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1104,6 +1109,7 @@ public class VentanaPrincipal extends JFrame {
 		textMantC.setBounds(530, 249, 130, 20);
 		panelResultados.add(textMantC);
 		textMantC.setColumns(10);
+		listaTF.add(textMantC);
 		
 		textUsabA = new JTextField();
 		textUsabA.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1112,6 +1118,7 @@ public class VentanaPrincipal extends JFrame {
 		textUsabA.setBounds(530, 274, 130, 20);
 		panelResultados.add(textUsabA);
 		textUsabA.setColumns(10);
+		listaTF.add(textUsabA);
 		
 		textUsabB = new JTextField();
 		textUsabB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1120,6 +1127,7 @@ public class VentanaPrincipal extends JFrame {
 		textUsabB.setBounds(530, 299, 130, 20);
 		panelResultados.add(textUsabB);
 		textUsabB.setColumns(10);
+		listaTF.add(textUsabB);
 		
 		textUsabC = new JTextField();
 		textUsabC.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1128,6 +1136,7 @@ public class VentanaPrincipal extends JFrame {
 		textUsabC.setBounds(530, 324, 130, 20);
 		panelResultados.add(textUsabC);
 		textUsabC.setColumns(10);
+		listaTF.add(textUsabC);
 		
 		textFPortA = new JTextField();
 		textFPortA.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1136,6 +1145,7 @@ public class VentanaPrincipal extends JFrame {
 		textFPortA.setBounds(530, 349, 130, 20);
 		panelResultados.add(textFPortA);
 		textFPortA.setColumns(10);
+		listaTF.add(textFPortA);
 		
 		textFPortB = new JTextField();
 		textFPortB.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1144,6 +1154,7 @@ public class VentanaPrincipal extends JFrame {
 		textFPortB.setBounds(530, 374, 130, 20);
 		panelResultados.add(textFPortB);
 		textFPortB.setColumns(10);
+		listaTF.add(textFPortB);
 		
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBackground(new Color(244, 164, 96));
@@ -1184,6 +1195,20 @@ public class VentanaPrincipal extends JFrame {
 		separator_e.setForeground(new Color(0, 0, 0));
 		separator_e.setBounds(196, 348, 291, 2);
 		panelResultados.add(separator_e);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				panelFuncionalidad.setVisible(true);
+				panelResultados.setVisible(false);
+				progressBar.setVisible(true);
+				lblProgreso.setVisible(true);
+			}
+		});
+		btnModificar.setBackground(new Color(95, 158, 160));
+		btnModificar.setBounds(484, 455, 89, 23);
+		panelResultados.add(btnModificar);
 		
 	}
 	
@@ -1246,7 +1271,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 	}
 	
-	public void calcularResultadoFinal() {
+	private void calcularResultadoFinal() {
 		
 		double funcionalidad = ((respFunA + respFunB ) / 2) * 0.3;
 		double eficiencia = ((respEficA + respEficB + respEficC) / 3) * 0.2;
@@ -1266,5 +1291,61 @@ public class VentanaPrincipal extends JFrame {
 			textResultado.setBackground(Color.RED);
 		}
 		
+	}
+	
+	private void mostrarSubcategoriaElegida(ArrayList<ButtonGroup> listaBG, ArrayList<JTextField> listaTF) {
+		
+		String[] opciones = {"",
+							 "Requiere iniciar sesión y contraseña encriptada",
+							 "Sólo requiere iniciar sesión",
+							 "No requiere iniciar sesión",
+							 "Se utiliza una presión de 10-4 o superior",
+							 "Se utiliza una presión de entre 10-2 y 10-3",
+							 "Se utiliza una presión de 10-1 o inferior",
+							 "Se utiliza menos del 10% del procesador",
+							 "Se utiliza entre 10% y 40% del procesador",
+							 "Se utiliza más del 40% del procesador",
+							 "Se utiliza menos del 30% del disco rígido",
+							 "Se utiliza entre el 30% y 60% del disco rígido",
+							 "Se utiliza más del 60% del disco rígido",
+							 "Utiliza menos de 100MB de memoria RAM",
+							 "Utiliza entre 100MB y 500MB de memoria RAM",
+							 "Utiliza más de 500MB de memoria RAM",
+							 "Código comentado mayor a 30%",
+							 "Código comentado entre 30% y 10%",
+							 "Código comentado inferior a 10%",
+							 "La complejidad ciclomática es inferior a 11",
+							 "La complejidad ciclomática está entre 11 y 21",
+							 "La complejidad ciclomática supera los 21",
+							 "La cantidad de fallas es inferior a 4",
+							 "La cantidad de fallas está entre 4 y 7",
+							 "La cantidad de fallas es superior a 7",
+							 "Posee ayuda contextual sobre botones de acción Y manual de usuario incorporado",
+							 "Posee ayuda contextual sobre botones de acción O manual de usuario incorporado",
+							 "No posee ningun tipo de ayuda",
+							 "<html><p>El usuario puede operar el producto sin necesidad de recurrir a asistencia externa</p> <p>a la que puede encontrar dentro del producto</p></html>",
+							 "El usuario requiere consultar el manual de uso impreso para poder operar el producto",
+							 "<html><p>El usuario requiere consultar a personal especializado más de 5 veces en un período</p> <p>de tiempo para operar el producto software</p></html>",
+							 "La cantidad de pasos es inferior a 4",
+							 "La cantidad de pasos está entre 5 y 7",
+							 "la cantidad de pasos es superior a 7",
+							 "El producto se ejecuta de manera portable, sin instalar",
+							 "El producto se instala en menos de 3 pasos",
+							 "El producto se instala en 3 pasos o más",
+							 "El producto es compatible con 3 o más sistemas operativos",
+							 "El producto es compatible con 2 sistemas operativos",
+							 "El producto es compatible con un sistema operativo"};
+		
+		for(int i = 0; i < listaBG.size(); i++) {
+			if(Integer.parseInt(listaBG.get(i).getSelection().getActionCommand()) == 1) {
+				listaTF.get(i).setToolTipText(opciones[(i+1)*3]);
+			}else {
+				if(Integer.parseInt(listaBG.get(i).getSelection().getActionCommand()) == 2 ) {
+					listaTF.get(i).setToolTipText(opciones[(i+1)*3 - 1]);
+				}else {
+					listaTF.get(i).setToolTipText(opciones[(i+1)*3 - 2]);
+				}
+			}
+		}
 	}
 }
