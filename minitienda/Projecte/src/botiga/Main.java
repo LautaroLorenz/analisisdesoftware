@@ -33,9 +33,10 @@ public class Main extends javax.swing.JFrame
     private Productos[] arrayProductos;
     private boolean[] editabeClientes = {false,false,false,true};
     private boolean isAdmin = false;
-    int userActual = 0, compraTotal = 0;
+    int userActual = 0;
+	double compraTotal = 0;
     int[] prodComprados = null;
-    private int[] arrayTotal;
+    private double[] arrayTotal;
 
     /** Creates new form Main */
     public Main() throws IOException {
@@ -167,6 +168,13 @@ public class Main extends javax.swing.JFrame
         tableClientes = new javax.swing.JTable();
         jlbClientes = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
+        txtTotal.setEditable(false);
+        txtTotal.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent arg0) {
+        		txtTotal.setToolTipText("Este es el importe total a pagar");
+        	}
+        });
         jLabel21 = new javax.swing.JLabel();
         jlbNumProd = new javax.swing.JLabel();
         btnComprar = new javax.swing.JButton();
@@ -358,7 +366,7 @@ public class Main extends javax.swing.JFrame
         jScrollPane5.setViewportView(jtdescripcion);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabel18.setText("€");
+        jLabel18.setText("$");
 
         jButton3.setText("Cerrar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -1313,18 +1321,23 @@ public class Main extends javax.swing.JFrame
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void tableClientesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableClientesKeyReleased
-        int precio = 0, total = 0, cantidad = 0;
+        double precio = 0,
+		 total = 0;
+        int cantidad = 0;
         prodComprados = new int[tableClientes.getRowCount()];
-        arrayTotal = new int[tableClientes.getRowCount()];
+        arrayTotal = new double[tableClientes.getRowCount()];
         String texto = "La cantidad debe ser un entero positivo.";
         String cabecera = "Error en la cantidad";
         for(int x = 0; x < tableClientes.getRowCount(); x++)
         {
-            precio = Utils.leerEntero(tableClientes.getValueAt(x, 1).toString());
+            precio = Utils.leerDouble(tableClientes.getValueAt(x, 1).toString());
             cantidad = Utils.leerEntero(tableClientes.getValueAt(x, 3).toString());
+           
+            
             if(cantidad < 0)
             {
-                optionPane(texto, cabecera);
+            	optionPane(texto, cabecera);
+            	
                 break;
             }
             else
@@ -1333,25 +1346,28 @@ public class Main extends javax.swing.JFrame
                 total += precio*cantidad;
                 arrayTotal[x] = precio*cantidad;
             }
+            
+           
         }
         compraTotal = total;
         txtTotal.setText(""+total);
     }//GEN-LAST:event_tableClientesKeyReleased
 
     private void tableClientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableClientesMouseReleased
-        int precio = 0, total = 0, cantidad = 0;
+        double precio = 0,
+		 total = 0;
+        int cantidad = 0;
         prodComprados = new int[tableClientes.getRowCount()];
-        arrayTotal = new int[tableClientes.getRowCount()];
+        arrayTotal = new double[tableClientes.getRowCount()];
         String texto = "La cantidad debe ser un entero positivo.";
         String cabecera = "Error en la cantidad";
         for(int x = 0; x < tableClientes.getRowCount(); x++)
         {
-            precio = Utils.leerEntero(tableClientes.getValueAt(x, 1).toString());
+            precio = Utils.leerDouble(tableClientes.getValueAt(x, 1).toString());
             cantidad = Utils.leerEntero(tableClientes.getValueAt(x, 3).toString());
             if(cantidad < 0)
             {
-                optionPane(texto, cabecera);
-                break;
+                optionPane3(texto, cabecera, x);
             }
             else
             {
@@ -1361,7 +1377,7 @@ public class Main extends javax.swing.JFrame
             }
         }
         compraTotal = total;
-        txtTotal.setText(""+total);
+        txtTotal.setText(String.format("%.2f", compraTotal));
     }//GEN-LAST:event_tableClientesMouseReleased
 
     /**
@@ -1479,7 +1495,7 @@ public class Main extends javax.swing.JFrame
     private void mostrarProductos()
     {
         int cont = 0;
-        DefaultTableModel modelInicial = new DefaultTableModel(new String[] {"Nombre", "Precio € ","Descripcion"}, 0);
+        DefaultTableModel modelInicial = new DefaultTableModel(new String[] {"Nombre", "Precio $ ","Descripcion"}, 0);
         tableProducts.setModel(modelInicial);
         DefaultTableModel model = (DefaultTableModel) tableProducts.getModel();
 
@@ -1496,7 +1512,7 @@ public class Main extends javax.swing.JFrame
         tableClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
-            new String[] {"Nombre", "Precio € ","Descripcion","Cantidad"}
+            new String[] {"Nombre", "Precio $ ","Descripcion","Cantidad"}
         ) {
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1517,7 +1533,12 @@ public class Main extends javax.swing.JFrame
     private void optionPane(String texto, String cabecera) {
         JOptionPane.showMessageDialog(new JFrame(), texto, cabecera, JOptionPane.WARNING_MESSAGE);
     }
-
+    
+    private void optionPane3(String texto, String cabecera, int x) {
+        JOptionPane.showMessageDialog(new JFrame(), texto, cabecera, JOptionPane.WARNING_MESSAGE);
+        tableClientes.setValueAt(0, x, 3);
+    }
+    
     private void optionPane2(String[] texto, String cabecera) {
         JOptionPane.showMessageDialog(new JFrame(), texto, cabecera, JOptionPane.WARNING_MESSAGE);
     }
