@@ -134,7 +134,19 @@ public class Main extends javax.swing.JFrame
         jscrClientes = new javax.swing.JScrollPane();
         tableUsers = new javax.swing.JTable();
         btnInsertar = new javax.swing.JButton();
+        btnInsertar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnInsertar.setToolTipText("Clic aqui para crear un cliente");
+        	}
+        });
         btnEliminar = new javax.swing.JButton();
+        btnEliminar.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnEliminar.setToolTipText("Clic aqui para eliminar al cliente seleccionado");
+        	}
+        });
         btnSalir = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -146,7 +158,19 @@ public class Main extends javax.swing.JFrame
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         btnInsertar1 = new javax.swing.JButton();
+        btnInsertar1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnInsertar1.setToolTipText("Clic aqui para crear un producto");
+        	}
+        });
         btnEliminar1 = new javax.swing.JButton();
+        btnEliminar1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+        		btnEliminar1.setToolTipText("Clic aqui para eliminar el producto seleccionado");
+        	}
+        });
         btnSalir1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
