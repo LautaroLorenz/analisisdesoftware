@@ -44,11 +44,11 @@ public class Utils
     }
      public static Productos[] guardarTablaProductos(Productos[] arrayProductos, JTable tableProducts)
     {
-        int precio = 0;
+        double precio = 0;
         for(int x = 0; x < tableProducts.getRowCount(); x++)
         {
             arrayProductos[x].setNombre(tableProducts.getValueAt(x, 0).toString());
-            precio = leerEntero(tableProducts.getValueAt(x, 1).toString());
+            precio = leerDouble(tableProducts.getValueAt(x, 1).toString());
             arrayProductos[x].setPrecio(precio);
             arrayProductos[x].setDescripcion(tableProducts.getValueAt(x, 2).toString());
 
