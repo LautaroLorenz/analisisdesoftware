@@ -36,8 +36,8 @@ public class Productos implements Serializable {
         this.Nombre = Nombre;
     }
 
-  public void setPrecio(int Precio) {
-        this.Precio = Precio;
+  public void setPrecio(double precio2) {
+        this.Precio = precio2;
     }
 
     public void setDescripcion(String Descripcion) {
