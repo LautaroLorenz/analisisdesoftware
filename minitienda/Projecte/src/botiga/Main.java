@@ -26,6 +26,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Main extends javax.swing.JFrame
 {
@@ -676,30 +678,32 @@ public class Main extends javax.swing.JFrame
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/tienda-virtual.gif"))); // NOI18N
 
-        jLabel23.setText("Bienvenidos a nuestra Tienda Virtual. Espero");
+        jLabel23.setText("Bienvenidos a nuestra Tienda Virtual.");
 
-        jLabel24.setText("que os haya gustado.");
+        jLabel24.setText("Esperamos que les haya gustado.");
 
-        jLabel25.setText("Esta mini tienda se trata del proyecto final de");
+        jLabel25.setText("Esta mini tienda se trata del proyecto de una");
 
-        jLabel26.setText("una asignatura de la universidad. Como vereis");
+        jLabel26.setText("materia de la universidad. Como ven es muy");
 
-        jLabel27.setText("es muy simple puesto que nos dieron una sola");
+        jLabel27.setText("simple ya que nos dieron un solo cuatrimestre");
 
-        jLabel28.setText("semana para planificar y entregar el Proyecto.");
+        jLabel28.setText("para planificar y entregar el proyecto.");
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 12));
         jLabel29.setText("Desarrolladores:");
 
-        jLabel30.setText("Manuel Ruiz");
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel30.setText("Manuel Ruiz - Cristian Castillejo");
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel31.setText("ruizmanuel@gmail.com");
-
-        jLabel32.setText("Cristian Castillejo");
+        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 12));
+        jLabel31.setText("Adaptaciones:");
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel33.setText("info@uniondeprogramadores.com");
+        jLabel33.setText("Sabrina Tejada-Luis Villca-Fernando Sanchez");
+
+        jLabel32.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel32.setText("Mariano Riquelme-Lautaro Lorenz-Adrian Morel");
 
         jLabel34.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel34.setForeground(new java.awt.Color(0, 153, 0));
@@ -1566,5 +1570,4 @@ public class Main extends javax.swing.JFrame
     private void optionPane2(String[] texto, String cabecera) {
         JOptionPane.showMessageDialog(new JFrame(), texto, cabecera, JOptionPane.WARNING_MESSAGE);
     }
-
 }
